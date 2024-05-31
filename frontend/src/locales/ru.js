@@ -1,1 +1,8 @@
-export default {};
+export default {
+    translation: {
+        baseTextUI: {
+            header: 'RSS агрегатор',
+        },
+
+    },
+};
