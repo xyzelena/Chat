@@ -7,12 +7,14 @@
   border-radius: var(--bs-card-border-radius);
   box-shadow: var(--bs-box-shadow-sm);
 
-  padding: 3rem;
-
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.container_enteringData_main {
+  padding: 3rem;
 
   display: flex;
   flex-wrap: wrap;
@@ -99,4 +101,26 @@
   background-color: var(--bs-btn-hover-bg);
   border-color: var(--bs-btn-hover-border-color);
   color: var(--bs-btn-hover-color);
+}
+
+.container_enteringData_footer {
+  background-color: var(--bs-card-cap-bg);
+  border-top: var(--bs-border-width) solid var(--bs-card-border-color);
+  width: 100%;
+  text-align: center;
+  padding: 1.5rem
+}
+
+.container_enteringData_footer a {
+  color: var(--bs-btn-hover-bg);
+  cursor: pointer;
+}
+
+.container_enteringData_footer a:hover {
+  color: blue;
+}
+
+.container_enteringData_footer span {
+  display: inline-block;
+  margin-right: 2%;
 }
