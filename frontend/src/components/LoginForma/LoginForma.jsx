@@ -19,7 +19,7 @@ const LoginForma = () => {
                         <Field
                             name="username"
                             id="username"
-                            autocomplete="username"
+                            autoComplete="username"
                             required
                             placeholder="Пароль"
                             type='text'
@@ -28,7 +28,7 @@ const LoginForma = () => {
                         <Field
                             name="password"
                             id="password"
-                            autocomplete="current-password"
+                            autoComplete="current-password"
                             required
                             placeholder="Ваш ник"
                             type="password"
