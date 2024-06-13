@@ -1,15 +1,13 @@
 import {Link} from'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import styles from './NotFound.module.css';
-
 const NotFound = () => {
   const { t } = useTranslation();
 
   return (
-    <div className={styles.container_notFound}>
-      <h1> {t('notFound.header')} </h1>
-      <p> 
+    <div className='text-center' >
+      <h1 className='h4 text-muted'> {t('notFound.header')} </h1>
+      <p className='text-muted'> 
         {t('notFound.text')} 
         <Link to="/"> {t('notFound.linkMainPage')} </Link>
       </p>
