@@ -1,10 +1,13 @@
 import {Link} from'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import LoginForma from '../../components/LoginForma/LoginForma';
 
 import img from '../../assets/images/login.jpg';
 
 const Login = () => {
+  const { t } = useTranslation();
+
   return (
     <div className='container_enteringData'>
 
@@ -14,15 +17,15 @@ const Login = () => {
         </div>
 
         <div className='forma'>
-          <h1>Войти</h1>
+          <h1> {t('loginForma.header')}</h1>
 
           <LoginForma />
         </div>
       </div>
 
       <div className='container_enteringData_footer'>
-        <span>Нет аккаунта?</span>
-        <Link to="/signup">Регистрация</Link>
+        <span>{t('loginForma.noRegistrationQuestion')}</span>
+        <Link to="/signup">{t('loginForma.btnGetRegistration')}</Link>
       </div>
 
     </div>

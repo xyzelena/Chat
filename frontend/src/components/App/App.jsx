@@ -9,7 +9,10 @@ import { ROUTES } from '../../utils/router.js';
 
 import './App.css';
 
-const App = () => {
+const App = (props) => {
+
+console.log(props.i18n);
+
     return (
         <BrowserRouter>
           <Routes>
