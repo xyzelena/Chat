@@ -12,6 +12,7 @@ extends:
   - plugin:react/recommended
   - plugin:functional/recommended
   - plugin:react-hooks/recommended
+  - prettier
 
 parserOptions:
   ecmaFeatures:
