@@ -1,7 +1,7 @@
 import {Link} from'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import LoginForma from '../../components/LoginForma/LoginForma';
+import LoginForma from '../../containers/LoginForma/LoginForma';
 
 import img from '../../assets/images/login.jpg';
 
