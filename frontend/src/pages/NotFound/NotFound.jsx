@@ -6,10 +6,10 @@ const NotFound = () => {
 
   return (
     <div className='text-center' >
-      <h1 className='h4 text-muted'> {t('notFound.header')} </h1>
+      <h1 className='h4 text-muted'> {t('notFoundPage.header')} </h1>
       <p className='text-muted'> 
-        {t('notFound.text')} 
-        <Link to="/"> {t('notFound.linkMainPage')} </Link>
+        {t('notFoundPage.text')} 
+        <Link to="/"> {t('notFoundPage.linkMainPage')} </Link>
       </p>
     </div>
   )

@@ -4,13 +4,13 @@ export default {
       header: 'Чат',
     },
 
-    notFound: {
+    notFoundPage: {
       header: 'Страница не найдена',
       text: 'Но вы можете перейти',
       linkMainPage: 'на главную страницу',
     },
 
-    loginForma: {
+    loginPage: {
       header: 'Войти',
 
       login: 'Логин',
@@ -18,6 +18,12 @@ export default {
 
       noRegistrationQuestion: 'Нет аккаунта?',
       btnGetRegistration: 'Регистрация',
+    },
+
+    loginForma: {
+      login: 'Ваш ник',
+      password: 'Пароль',
+      btnSubmit: 'Войти',
     },
 
   },

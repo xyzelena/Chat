@@ -1,6 +1,9 @@
 import { Formik, Form, Field } from 'formik';
+import { useTranslation } from 'react-i18next';
 
 const LoginForma = () => {
+    const { t } = useTranslation();
+    
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
     return (
@@ -21,7 +24,7 @@ const LoginForma = () => {
                             id="username"
                             autoComplete="username"
                             required
-                            placeholder="Пароль"
+                            placeholder={t('loginForma.login')}
                             type='text'
                         />
 
@@ -30,12 +33,12 @@ const LoginForma = () => {
                             id="password"
                             autoComplete="current-password"
                             required
-                            placeholder="Ваш ник"
+                            placeholder={t('loginForma.password')}
                             type="password"
                         />
 
                         <button type="submit" disabled={isSubmitting}>
-                            Войти
+                            {t('loginForma.btnSubmit')}
                         </button>
                     </Form>
             )}

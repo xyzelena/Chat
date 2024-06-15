@@ -17,15 +17,15 @@ const Login = () => {
         </div>
 
         <div className='forma'>
-          <h1> {t('loginForma.header')}</h1>
+          <h1> {t('loginPage.header')}</h1>
 
           <LoginForma />
         </div>
       </div>
 
       <div className='container_enteringData_footer'>
-        <span>{t('loginForma.noRegistrationQuestion')}</span>
-        <Link to="/signup">{t('loginForma.btnGetRegistration')}</Link>
+        <span>{t('loginPage.noRegistrationQuestion')}</span>
+        <Link to="/signup">{t('loginPage.btnGetRegistration')}</Link>
       </div>
 
     </div>
