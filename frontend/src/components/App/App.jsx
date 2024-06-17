@@ -8,10 +8,11 @@ import {
 
 import { useState } from 'react';
 
-import AuthContext from '../../contexts/index.jsx';
-import useAuth from '../../hooks/index.jsx';
+import AuthContext from '../../contexts/AuthContext.jsx';
+import useAuth from '../../hooks/useAuth.jsx';
 
-import Header from '../../containers/Header/Header.jsx';
+import Header from '../Header/Header.jsx';
+
 import Chat from '../../pages/Chat/Chat.jsx';
 import Login from '../../pages/Login/Login.jsx';
 import SignUp from '../../pages/SignUp/SignUp.jsx';
@@ -54,7 +55,14 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Header />}>
-            <Route index element={<Chat />} />
+            <Route
+              index
+              element={
+                <PrivateRoute>
+                  <Chat />
+                </PrivateRoute>
+              }
+            />
             <Route path={ROUTES.login} element={<Login />} />
             <Route path={ROUTES.signup} element={<SignUp />} />
             <Route path="*" element={<NotFound />} />
