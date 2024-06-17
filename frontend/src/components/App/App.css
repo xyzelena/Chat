@@ -32,7 +32,6 @@
   justify-content: center;
 }
 
-
 .container_enteringData_img img {
   width: 100%;
   min-width: 120px;
@@ -63,8 +62,8 @@
 .forma button {
   width: 100%;
 
-  height: calc(3.5rem + var(--bs-border-width)* 2);
-  min-height: calc(3.5rem + var(--bs-border-width)* 2);
+  height: calc(3.5rem + var(--bs-border-width) * 2);
+  min-height: calc(3.5rem + var(--bs-border-width) * 2);
 
   border: var(--bs-border-width) solid var(--bs-border-color);
   border-radius: var(--bs-border-radius);
@@ -76,7 +75,7 @@
 
   line-height: 1.25;
 
-  padding: 1rem .75rem;
+  padding: 1rem 0.75rem;
 
   margin-bottom: 3%;
 }
@@ -94,7 +93,11 @@
   vertical-align: middle;
 
   text-decoration: none;
-  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 
 .forma button:hover {
@@ -108,7 +111,7 @@
   border-top: var(--bs-border-width) solid var(--bs-card-border-color);
   width: 100%;
   text-align: center;
-  padding: 1.5rem
+  padding: 1.5rem;
 }
 
 .container_enteringData_footer a {
