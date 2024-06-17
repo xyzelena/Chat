@@ -2,14 +2,16 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Link,
   Navigate,
   useLocation,
 } from 'react-router-dom';
 
+import { useState } from 'react';
+
 import AuthContext from '../../contexts/index.jsx';
 import useAuth from '../../hooks/index.jsx';
 
+import Header from '../../containers/Header/Header.jsx';
 import Chat from '../../pages/Chat/Chat.jsx';
 import Login from '../../pages/Login/Login.jsx';
 import SignUp from '../../pages/SignUp/SignUp.jsx';
@@ -19,19 +21,47 @@ import ROUTES from '../../utils/routes.js';
 
 import './App.css';
 
-const App = () => {
-  console.log(ROUTES);
+const AuthProvider = ({ children }) => {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const logIn = () => setLoggedIn(true);
+  const logOut = () => {
+    localStorage.removeItem('userId');
+    setLoggedIn(false);
+  };
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Chat />}>
-          <Route path={ROUTES.login} element={<Login />} />
-          <Route path={ROUTES.signup} element={<SignUp />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <AuthContext.Provider value={{ loggedIn, logIn, logOut }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+const PrivateRoute = ({ children }) => {
+  const auth = useAuth();
+  const location = useLocation();
+
+  return auth.loggedIn ? (
+    children
+  ) : (
+    <Navigate to="/login" state={{ from: location }} />
+  );
+};
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Header />}>
+            <Route index element={<Chat />} />
+            <Route path={ROUTES.login} element={<Login />} />
+            <Route path={ROUTES.signup} element={<SignUp />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 
