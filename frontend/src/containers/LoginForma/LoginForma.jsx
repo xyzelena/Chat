@@ -49,7 +49,7 @@ const LoginForma = () => {
     },
     onSubmit: ({ username, password }) => {
       axios
-        .post(apiRoutes.loginPath(), {
+        .post(apiRoutes.loginPath, {
           username,
           password,
         })
