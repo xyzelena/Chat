@@ -1,15 +1,7 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-  useLocation,
-} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { useState } from 'react';
-
-import AuthContext from '../../contexts/AuthContext.jsx';
-import useAuth from '../../hooks/useAuth.jsx';
+import AuthProvider from '../../containers/AuthProvider.jsx';
+import PrivateRoute from '../../containers/PrivateRoute.jsx';
 
 import Header from '../Header/Header.jsx';
 
@@ -21,33 +13,6 @@ import NotFound from '../../pages/NotFound/NotFound.jsx';
 import ROUTES from '../../utils/routes.js';
 
 import './App.css';
-
-const AuthProvider = ({ children }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  const logIn = () => setLoggedIn(true);
-  const logOut = () => {
-    localStorage.removeItem('userId');
-    setLoggedIn(false);
-  };
-
-  return (
-    <AuthContext.Provider value={{ loggedIn, logIn, logOut }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
-
-const PrivateRoute = ({ children }) => {
-  const auth = useAuth();
-  const location = useLocation();
-
-  return auth.loggedIn ? (
-    children
-  ) : (
-    <Navigate to="/login" state={{ from: location }} />
-  );
-};
 
 const App = () => {
   return (

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Form } from 'react-bootstrap';
 
@@ -12,15 +12,11 @@ import { setCredentials } from '../../slices/authSlice.js';
 import useAuth from '../../hooks/useAuth.jsx';
 import apiRoutes from '../../utils/apiRoutes.js';
 
-const LoginForma = () => {
-  // Вытаскиваем данные из хранилища
-  // {username: null, token: null
-  // const authState = useSelector((state) => state.auth);
+import { setItemStorage } from '../../utils/authLocalStorage.js';
 
+const LoginForma = () => {
   // Возвращает метод store.dispatch() текущего хранилища
   const dispatch = useDispatch();
-
-  const location = useLocation();
 
   const navigate = useNavigate();
 
@@ -75,9 +71,7 @@ const LoginForma = () => {
           //response.data {token:"eyJh...",username:"admin"}
           dispatch(setCredentials(response.data));
 
-          const data = JSON.stringify(response.data);
-
-          localStorage.setItem('userId', data);
+          setItemStorage(response.data);
 
           authHandle.logIn();
 
