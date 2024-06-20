@@ -1,21 +1,30 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Form } from 'react-bootstrap';
+
 import { useFormik } from 'formik';
 
 import axios from 'axios';
 
+import { setCredentials } from '../../slices/authSlice.js';
 import useAuth from '../../hooks/useAuth.jsx';
-
 import apiRoutes from '../../utils/apiRoutes.js';
 
 const LoginForma = () => {
+  // Вытаскиваем данные из хранилища
+  // {username: null, token: null
+  // const authState = useSelector((state) => state.auth);
+
+  // Возвращает метод store.dispatch() текущего хранилища
+  const dispatch = useDispatch();
+
   const location = useLocation();
 
   const navigate = useNavigate();
 
-  const auth = useAuth();
+  const authHandle = useAuth();
   // {loggedIn: false, logIn: ƒ, logOut: ƒ}
 
   const { t } = useTranslation();
@@ -33,11 +42,20 @@ const LoginForma = () => {
   useEffect(() => {
     if (validAuth === false) {
       refUsername.current.focus();
+      refUsername.current.classList.add('is-invalid');
+      refPassword.current.classList.add('is-invalid');
       refFeedback.current.style.display = 'block';
     }
 
     if (validAuth === true) {
+      refUsername.current.classList.remove('is-invalid');
+      refPassword.current.classList.remove('is-invalid');
+
+      refUsername.current.classList.add('is-valid');
+      refPassword.current.classList.add('is-valid');
+
       refFeedback.current.style.display = 'none';
+
       navigate('/');
     }
   }, [validAuth]);
@@ -54,10 +72,15 @@ const LoginForma = () => {
           password,
         })
         .then((response) => {
+          //response.data {token:"eyJh...",username:"admin"}
+          dispatch(setCredentials(response.data));
+
           const data = JSON.stringify(response.data);
+
           localStorage.setItem('userId', data);
 
-          auth.logIn();
+          authHandle.logIn();
+
           setValidAuth(true);
         })
         .catch(() => {
@@ -98,7 +121,7 @@ const LoginForma = () => {
         />
 
         <div className="invalid-feedback" ref={refFeedback}>
-          Неверные имя пользователя или пароль
+          {t('loginForma.error')}
         </div>
       </div>
 
