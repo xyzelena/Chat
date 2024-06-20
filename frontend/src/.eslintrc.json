@@ -47,6 +47,12 @@
     "no-unused-vars": 0,
     "react/jsx-no-constructed-context-values": 0,
     "arrow-body-style": 0,
-    "spaced-comment": 0
+    "spaced-comment": 0,
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ]
   }
 }
