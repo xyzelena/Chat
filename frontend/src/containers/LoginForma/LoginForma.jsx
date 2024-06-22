@@ -6,7 +6,7 @@ import { Form } from 'react-bootstrap';
 
 import { useFormik } from 'formik';
 
-import axios from 'axios';
+import postAuth from '../../api/authApi.js';
 
 import { setCredentials } from '../../slices/authSlice.js';
 import useAuth from '../../hooks/useAuth.jsx';
@@ -61,25 +61,16 @@ const LoginForma = () => {
       username: '',
       password: '',
     },
-    onSubmit: ({ username, password }) => {
-      axios
-        .post(apiRoutes.loginPath, {
-          username,
-          password,
-        })
-        .then((response) => {
-          //response.data {token:"eyJh...",username:"admin"}
-          dispatch(setCredentials(response.data));
-
-          setItemStorage(response.data);
-
-          authHandle.logIn();
-
-          setValidAuth(true);
-        })
-        .catch(() => {
-          setValidAuth(false);
-        });
+    onSubmit: async (valuesForm) => {
+      try {
+        const response = await postAuth(apiRoutes.loginPath, valuesForm);
+        dispatch(setCredentials(response.data));
+        setItemStorage(response.data);
+        authHandle.logIn();
+        setValidAuth(true);
+      } catch (error) {
+        setValidAuth(false);
+      }
     },
   });
 
