@@ -49,6 +49,10 @@ const LoginForma = () => {
     }
   }, [validAuth]);
 
+  useEffect(() => {
+    if (validAuth) navigate('/');
+  }, [validAuth, navigate]);
+
   const formik = useFormik({
     initialValues: {
       username: '',
