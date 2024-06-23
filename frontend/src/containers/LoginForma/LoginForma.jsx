@@ -8,13 +8,12 @@ import { useFormik } from 'formik';
 import axiosApi from '../../api/axiosApi.js';
 import routes from '../../utils/routes.js';
 
-import useAuth from '../../hooks/useAuth.jsx';
+import useAuth from '../../hooks/useAuth.js';
 
 const LoginForma = () => {
   const navigate = useNavigate();
 
-  const authHandle = useAuth();
-  // {loggedIn: false, logIn: ƒ, logOut: ƒ}
+  const { logIn } = useAuth();
 
   const { t } = useTranslation();
 
@@ -63,8 +62,7 @@ const LoginForma = () => {
         const response = await axiosApi.post(routes.login, valuesForm);
         //console.log(response.data); // => { token: ..., username: 'admin' }
 
-        authHandle.logIn(response.data);
-
+        logIn(response.data);
         setValidAuth(true);
       } catch (error) {
         setValidAuth(false);
