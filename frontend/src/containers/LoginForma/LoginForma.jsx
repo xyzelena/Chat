@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Form } from 'react-bootstrap';
 
@@ -9,15 +8,9 @@ import { useFormik } from 'formik';
 import axiosApi from '../../api/axiosApi.js';
 import routes from '../../utils/routes.js';
 
-import { setCredentials } from '../../slices/authSlice.js';
 import useAuth from '../../hooks/useAuth.jsx';
 
-import { setItemStorage } from '../../utils/authLocalStorage.js';
-
 const LoginForma = () => {
-  // Возвращает метод store.dispatch() текущего хранилища
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const authHandle = useAuth();
@@ -66,11 +59,7 @@ const LoginForma = () => {
         const response = await axiosApi.post(routes.login, valuesForm);
         //console.log(response.data); // => { token: ..., username: 'admin' }
 
-        dispatch(setCredentials(response.data));
-
-        setItemStorage(response.data);
-
-        authHandle.logIn();
+        authHandle.logIn(response.data);
 
         setValidAuth(true);
       } catch (error) {

@@ -1,4 +1,10 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+
+import {
+  setItemStorage,
+  getItemStorage,
+  clearStorage,
+} from '../utils/authLocalStorage.js';
 
 // Начальное значение
 const initialState = {
@@ -12,19 +18,27 @@ const authSlice = createSlice({
   reducers: {
     setCredentials: (state, action) => {
       const { username, token } = action.payload;
-      // state.username = action.payload.username;
-      // state.token = action.payload.token;
 
-      //console.log(current(state));
+      setItemStorage({ username, token });
 
       return { ...state, username, token };
+    },
+    getCredentials: () => {
+      const data = getItemStorage();
+      return data;
+    },
+    deleteCredentials: (state) => {
+      clearStorage();
+
+      return { ...state, initialState };
     },
   },
 });
 
 // Слайс генерирует действия, которые экспортируются отдельно
 // Действия генерируются автоматически из имен ключей редьюсеров
-export const { setCredentials } = authSlice.actions;
+export const { setCredentials, getCredentials, deleteCredentials } =
+  authSlice.actions;
 
 // По умолчанию экспортируется редьюсер, сгенерированный слайсом
 export default authSlice.reducer;
