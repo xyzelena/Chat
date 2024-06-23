@@ -2,6 +2,7 @@ export default {
   translation: {
     baseTextUI: {
       header: 'Чат',
+      btnExit: 'Выйти',
     },
 
     notFoundPage: {
