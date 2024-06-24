@@ -1,12 +1,18 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setCredentials, deleteCredentials } from '../slices/authSlice.js';
+import {
+  setCredentials,
+  getCredentials,
+  deleteCredentials,
+} from '../slices/authSlice.js';
 
 import AuthContext from '../contexts/AuthContext.jsx';
 
 const AuthProvider = ({ children }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const isLoggedIn = () => getCredentials();
+
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn);
 
   // Возвращает метод store.dispatch() текущего хранилища
   const dispatch = useDispatch();
