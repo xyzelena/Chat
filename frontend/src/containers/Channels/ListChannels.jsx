@@ -1,4 +1,14 @@
+// import { useEffect } from 'react';
+import { useGetChannelsQuery } from '../../api/channelsApi.js';
+
 const ListChannels = () => {
+  const { data, error, isLoading, refetch } = useGetChannelsQuery();
+  console.log(data);
+
+  // useEffect(() => {
+  //   if (!isLoading && error) refetch();
+  // });
+
   return (
     <ul
       id="channels-box"
