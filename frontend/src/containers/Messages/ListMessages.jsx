@@ -5,6 +5,8 @@ const ListMessages = () => {
   // console.log(data);
   //{ id: '1', body: 'text message', channelId: '1', username: 'admin }
 
+  // channelId: '1'  slice
+
   return (
     <div>
       {data?.map((message) => (
