@@ -10,12 +10,12 @@ import {
 import AuthContext from '../contexts/AuthContext.jsx';
 
 const AuthProvider = ({ children }) => {
-  const isLoggedIn = () => getCredentials();
-
-  const [loggedIn, setLoggedIn] = useState(isLoggedIn);
-
   // Возвращает метод store.dispatch() текущего хранилища
   const dispatch = useDispatch();
+
+  const isLoggedIn = () => !!dispatch(getCredentials());
+
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn);
 
   const logIn = (data) => {
     dispatch(setCredentials(data));
