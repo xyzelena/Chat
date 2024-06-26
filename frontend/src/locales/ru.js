@@ -27,5 +27,19 @@ export default {
       btnSubmit: 'Войти',
       error: 'Неверные имя пользователя или пароль',
     },
+
+    messages: {
+      header: 'сообщения',
+    },
+
+    formNewMessage: {
+      ariaLabel: 'Новое сообщение',
+      placeholder: 'Введите сообщение...',
+      btnSubmit: 'Отправить',
+    },
+
+    channels: {
+      header: 'Каналы',
+    },
   },
 };

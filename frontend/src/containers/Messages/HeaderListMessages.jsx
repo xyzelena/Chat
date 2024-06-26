@@ -1,10 +1,21 @@
+import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+
 const HeaderListMessages = () => {
+  const { t } = useTranslation();
+
+  const { currentChannelData, countCurrentMessages } = useSelector(
+    (state) => state.currentChannel,
+  );
+
   return (
     <>
       <p className="m-0">
-        <b># general</b>
+        <b># {currentChannelData?.name}</b>
       </p>
-      <span className="text-muted">2 сообщения</span>
+      <span className="text-muted">
+        {countCurrentMessages} {t('messages.header')}
+      </span>
     </>
   );
 };

@@ -43,8 +43,6 @@ const LoginForma = () => {
       refPassword.current.classList.add('is-valid');
 
       refFeedback.current.style.display = 'none';
-
-      navigate('/');
     }
   }, [validAuth]);
 
