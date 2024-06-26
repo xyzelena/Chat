@@ -1,7 +1,13 @@
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 import { useGetChannelsQuery } from '../../api/channelsApi.js';
 
+import { setCurrentChannel } from '../../slices/currentChannelSlice.js';
+
 const ListChannels = () => {
+  const dispatch = useDispatch();
+
   const { data, error, isLoading, refetch } = useGetChannelsQuery();
   // console.log(data);
   // {id: '1', name: 'general', removable: false}
@@ -10,6 +16,10 @@ const ListChannels = () => {
   //   if (!isLoading && error) refetch();
   // });
 
+  useEffect(() => {
+    if (data) dispatch(setCurrentChannel(data[0]));
+  }, [data]);
+
   return (
     <ul
       id="channels-box"
@@ -17,7 +27,11 @@ const ListChannels = () => {
     >
       {data?.map((channel) => (
         <li className="nav-item w-100" key={channel.id}>
-          <button type="button" className="w-100 rounded-0 text-start btn">
+          <button
+            type="button"
+            className="w-100 rounded-0 text-start btn"
+            onClick={() => dispatch(setCurrentChannel(channel))}
+          >
             <span className="me-1">#</span>
             {channel.name}
           </button>
