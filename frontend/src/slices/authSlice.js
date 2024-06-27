@@ -8,8 +8,8 @@ import {
 
 // Начальное значение
 const initialState = {
-  username: null,
-  token: null,
+  username: '',
+  token: '',
 };
 
 const authSlice = createSlice({

@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  currentChannelData: null,
-  countCurrentMessages: null,
+  currentChannelData: {},
+  countCurrentMessages: 0,
 };
 
 const currentChannelSlice = createSlice({
@@ -10,10 +10,12 @@ const currentChannelSlice = createSlice({
   initialState,
   reducers: {
     setCurrentChannel: (state, action) => {
-      state.currentChannelData = action.payload;
+      const currentChannelData = { ...action.payload };
+      return { ...state, currentChannelData };
     },
     setCountCurrentMessages: (state, action) => {
-      state.countCurrentMessages = action.payload;
+      const countCurrentMessages = action.payload;
+      return { ...state, countCurrentMessages };
     },
   },
 });

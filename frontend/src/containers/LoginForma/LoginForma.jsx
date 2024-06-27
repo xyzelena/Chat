@@ -25,7 +25,7 @@ const LoginForma = () => {
 
   useEffect(() => {
     refUsername.current.focus();
-  }, []);
+  }, [validAuth]);
 
   useEffect(() => {
     if (validAuth === false) {
