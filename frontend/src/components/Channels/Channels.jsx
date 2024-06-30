@@ -16,7 +16,7 @@ const Channels = () => {
           +
         </button>
       </div>
-      <ListChannels />;
+      <ListChannels />
     </>
   );
 };
