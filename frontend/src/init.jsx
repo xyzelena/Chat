@@ -6,6 +6,8 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+//import socket from './socket.js';
+
 import resources from './locales/index.js';
 
 import store from './store/index.js';

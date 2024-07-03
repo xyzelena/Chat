@@ -13,19 +13,28 @@ const axiosApi = axios.create({
 axiosApi.interceptors.request.use(
   (config) => {
     const data = getItemStorage();
+
     if (data) {
       config.headers.Authorization = `Bearer ${data.token}`;
     }
+
+    console.log(config);
+
     return config;
   },
-  (error) => Promise.reject(error),
+  (error) => {
+    console.log(error);
+    return Promise.reject(error);
+  },
 );
 
 // Добавление interceptor для ответов
 axiosApi.interceptors.response.use(
-  (response) =>
+  (response) => {
     // Здесь можно добавить дополнительную логику обработки ответов
-    response,
+    //console.log(response);
+    return response;
+  },
   (error) => {
     console.log(error);
     return Promise.reject(error);

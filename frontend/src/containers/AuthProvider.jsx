@@ -1,29 +1,25 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-
-import {
-  setCredentials,
-  getCredentials,
-  deleteCredentials,
-} from '../slices/authSlice.js';
 
 import AuthContext from '../contexts/AuthContext.jsx';
 
-const AuthProvider = ({ children }) => {
-  // Возвращает метод store.dispatch() текущего хранилища
-  const dispatch = useDispatch();
+import {
+  setItemStorage,
+  getItemStorage,
+  clearStorage,
+} from '../utils/authLocalStorage.js';
 
-  const isLoggedIn = () => !!dispatch(getCredentials());
+const AuthProvider = ({ children }) => {
+  const isLoggedIn = !!getItemStorage();
 
   const [loggedIn, setLoggedIn] = useState(isLoggedIn);
 
   const logIn = (data) => {
-    dispatch(setCredentials(data));
+    setItemStorage(data);
     setLoggedIn(true);
   };
 
   const logOut = () => {
-    dispatch(deleteCredentials());
+    clearStorage();
     setLoggedIn(false);
   };
 

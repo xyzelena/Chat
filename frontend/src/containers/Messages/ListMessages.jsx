@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useGetMessagesQuery } from '../../api/messagesApi.js';
@@ -7,7 +7,7 @@ import { setCountCurrentMessages } from '../../slices/currentChannelSlice.js';
 
 const ListMessages = () => {
   const { data, error, isLoading, refetch } = useGetMessagesQuery();
-  // console.log(data);
+  //console.log(data);
   //{ id: '1', body: 'text message', channelId: '1', username: 'admin }
 
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const ListMessages = () => {
 
   useEffect(() => {
     dispatch(setCountCurrentMessages(currentChannelMessages?.length));
-  });
+  }, [data]);
 
   return (
     <div>
