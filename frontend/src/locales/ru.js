@@ -25,7 +25,7 @@ export default {
       login: 'Ваш ник',
       password: 'Пароль',
       btnSubmit: 'Войти',
-      error: 'Неверные имя пользователя или пароль',
+      invalidCredentials: 'Неверные имя пользователя или пароль',
     },
 
     messages: {
