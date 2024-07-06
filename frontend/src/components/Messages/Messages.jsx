@@ -1,5 +1,5 @@
-import HeaderListMessages from '../../containers/Messages/HeaderListMessages.jsx';
-import ListMessages from '../../containers/Messages/ListMessages.jsx';
+import HeaderListMessages from './HeaderListMessages.jsx';
+import ListMessages from './ListMessages.jsx';
 import FormNewMessage from '../../containers/Messages/FormNewMessage.jsx';
 
 const Messages = () => {

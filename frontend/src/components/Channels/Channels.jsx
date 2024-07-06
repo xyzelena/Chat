@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import ListChannels from '../../containers/Channels/ListChannels.jsx';
+import ListChannels from './ListChannels.jsx';
 
 const Channels = () => {
   const { t } = useTranslation();

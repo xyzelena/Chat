@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import AuthProvider from '../../containers/AuthProvider.jsx';
-import PrivateRoute from '../../containers/PrivateRoute.jsx';
+import AuthProvider from './AuthProvider.jsx';
+import PrivateRoute from './PrivateRoute.jsx';
 
 import Header from '../Header/Header.jsx';
 

@@ -5,27 +5,30 @@ import { Form } from 'react-bootstrap';
 
 import { useFormik } from 'formik';
 
-import axiosApi from '../../api/axiosApi.js';
-import routes from '../../utils/routes.js';
-
 import useAuth from '../../hooks/useAuth.js';
 
+import axiosApi from '../../api/axiosApi.js';
+
+import ROUTES from '../../utils/routes.js';
+
 const LoginForma = () => {
-  const navigate = useNavigate();
-
-  const { logIn } = useAuth();
-
   const { t } = useTranslation();
-
-  const [validAuth, setValidAuth] = useState(null);
+  const navigate = useNavigate();
 
   const refUsername = useRef();
   const refPassword = useRef();
   const refFeedback = useRef();
 
+  const { logIn, logOut } = useAuth();
+
+  const [validAuth, setValidAuth] = useState(null);
+  const [error, setError] = useState('');
+
+  const networkErrCode = 401;
+
   useEffect(() => {
     refUsername.current.focus();
-  }, [validAuth]);
+  }, []);
 
   useEffect(() => {
     if (validAuth === false) {
@@ -47,7 +50,7 @@ const LoginForma = () => {
   }, [validAuth]);
 
   useEffect(() => {
-    if (validAuth) navigate('/');
+    if (validAuth) navigate(ROUTES.home, { replace: false });
   }, [validAuth, navigate]);
 
   const formik = useFormik({
@@ -56,14 +59,22 @@ const LoginForma = () => {
       password: '',
     },
     onSubmit: async (valuesForm) => {
-      try {
-        const response = await axiosApi.post(routes.login, valuesForm);
-        //console.log(response.data); // => { token: ..., username: 'admin' }
+      setError('');
 
-        logIn(response.data);
-        setValidAuth(true);
-      } catch (error) {
+      try {
+        const response = await axiosApi.post(ROUTES.login, valuesForm);
+        //console.log(response.data); // => { token: ..., username: 'admin' }
+        if (response.data.token) {
+          logIn(response.data);
+          setValidAuth(true);
+        }
+      } catch (err) {
         setValidAuth(false);
+        setError(t('loginForma.invalidCredentials'));
+
+        if (err.response && err.response.status === networkErrCode) {
+          logOut();
+        }
       }
     },
   });
@@ -100,7 +111,7 @@ const LoginForma = () => {
         />
 
         <div className="invalid-feedback" ref={refFeedback}>
-          {t('loginForma.error')}
+          {error}
         </div>
       </div>
 

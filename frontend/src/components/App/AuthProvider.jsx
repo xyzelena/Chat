@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-import AuthContext from '../contexts/AuthContext.jsx';
+import AuthContext from '../../contexts/AuthContext.jsx';
 
 import {
   setItemStorage,
   getItemStorage,
   clearStorage,
-} from '../utils/authLocalStorage.js';
+} from '../../utils/authLocalStorage.js';
 
 const AuthProvider = ({ children }) => {
   const isLoggedIn = !!getItemStorage();

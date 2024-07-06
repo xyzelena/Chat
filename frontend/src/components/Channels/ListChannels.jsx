@@ -5,7 +5,7 @@ import { useGetChannelsQuery } from '../../api/channelsApi.js';
 
 import { setCurrentChannel } from '../../slices/currentChannelSlice.js';
 
-import Channel from '../../components/Channels/Channel.jsx';
+import Channel from './Channel.jsx';
 
 const ListChannels = () => {
   const dispatch = useDispatch();
