@@ -14,7 +14,7 @@ const HeaderListMessages = () => {
         <b># {currentChannelData?.name}</b>
       </p>
       <span className="text-muted">
-        {countCurrentMessages} {t('messages.header')}
+        {t('messages.countMessages', { count: countCurrentMessages })}
       </span>
     </>
   );

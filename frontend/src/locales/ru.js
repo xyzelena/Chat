@@ -29,7 +29,9 @@ export default {
     },
 
     messages: {
-      header: 'сообщения',
+      countMessages_one: '{{count}} сообщение',
+      countMessages_few: '{{count}} сообщения',
+      countMessages_many: '{{count}} сообщений',
     },
 
     formNewMessage: {
