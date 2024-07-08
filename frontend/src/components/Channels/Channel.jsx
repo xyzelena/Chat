@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import cn from 'classnames';
 
 const Channel = (props) => {
