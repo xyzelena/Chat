@@ -1,7 +1,7 @@
-import {Link} from'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import LoginForma from '../../containers/LoginForma/LoginForma';
+import LoginForm from '../../components/Forms/LoginForm.jsx';
 
 import img from '../../assets/images/login.jpg';
 
@@ -9,27 +9,25 @@ const Login = () => {
   const { t } = useTranslation();
 
   return (
-    <div className='container_enteringData'>
-
-      <div className='container_enteringData_main'>
-        <div className='container_enteringData_img'>
+    <div className="container_enteringData">
+      <div className="container_enteringData_main">
+        <div className="container_enteringData_img">
           <img src={img} alt="login" />
         </div>
 
-        <div className='forma'>
+        <div className="forma">
           <h1> {t('loginPage.header')}</h1>
 
-          <LoginForma />
+          <LoginForm />
         </div>
       </div>
 
-      <div className='container_enteringData_footer'>
+      <div className="container_enteringData_footer">
         <span>{t('loginPage.noRegistrationQuestion')}</span>
         <Link to="/signup">{t('loginPage.btnGetRegistration')}</Link>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Login; 
+export default Login;

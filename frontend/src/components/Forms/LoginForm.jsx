@@ -11,7 +11,7 @@ import axiosApi from '../../api/axiosApi.js';
 
 import ROUTES from '../../utils/routes.js';
 
-const LoginForma = () => {
+const LoginForm = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -70,7 +70,7 @@ const LoginForma = () => {
         }
       } catch (err) {
         setValidAuth(false);
-        setError(t('loginForma.invalidCredentials'));
+        setError(t('loginForm.invalidCredentials'));
 
         if (err.response && err.response.status === networkErrCode) {
           logOut();
@@ -87,7 +87,7 @@ const LoginForma = () => {
           id="username"
           autoComplete="username"
           required
-          placeholder={t('loginForma.login')}
+          placeholder={t('loginForm.login')}
           type="text"
           className="form-control"
           onChange={formik.handleChange}
@@ -102,7 +102,7 @@ const LoginForma = () => {
           id="password"
           autoComplete="current-password"
           required
-          placeholder={t('loginForma.password')}
+          placeholder={t('loginForm.password')}
           type="password"
           className="form-control"
           onChange={formik.handleChange}
@@ -115,9 +115,9 @@ const LoginForma = () => {
         </div>
       </div>
 
-      <button type="submit">{t('loginForma.btnSubmit')}</button>
+      <button type="submit">{t('loginForm.btnSubmit')}</button>
     </Form>
   );
 };
 
-export default LoginForma;
+export default LoginForm;

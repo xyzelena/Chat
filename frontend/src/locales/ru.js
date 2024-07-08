@@ -21,7 +21,7 @@ export default {
       btnGetRegistration: 'Регистрация',
     },
 
-    loginForma: {
+    loginForm: {
       login: 'Ваш ник',
       password: 'Пароль',
       btnSubmit: 'Войти',
