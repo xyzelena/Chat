@@ -34,7 +34,7 @@ export default {
       countMessages_many: '{{count}} сообщений',
     },
 
-    formNewMessage: {
+    newMessageForm: {
       ariaLabel: 'Новое сообщение',
       placeholder: 'Введите сообщение...',
       btnSubmit: 'Отправить',
