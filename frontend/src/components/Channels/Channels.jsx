@@ -23,6 +23,7 @@ const Channels = () => {
   useEffect(() => {
     if (data) {
       dispatch(setChannels(data));
+      dispatch(setCurrentChannelId(data[0].id));
     }
   }, [data, dispatch]);
 
