@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 //import socket from '../../socket.js';
 
 const NewMessageForm = (props) => {
+  const { username, channelId, addMessageHandler } = props;
+
   const { t } = useTranslation();
 
-  const { username, channelId, addMessageHandler } = props;
+  const refInputNewMessage = useRef();
 
   const [message, setNewMessage] = useState('');
 
@@ -19,6 +21,10 @@ const NewMessageForm = (props) => {
 
     setNewMessage('');
   };
+
+  useEffect(() => {
+    refInputNewMessage.current.focus();
+  }, [channelId]);
 
   return (
     <form
@@ -35,6 +41,7 @@ const NewMessageForm = (props) => {
           className="border-0 p-0 ps-2 form-control"
           value={message}
           onChange={(e) => setNewMessage(e.target.value)}
+          ref={refInputNewMessage}
         />
 
         <button type="submit" className="btn btn-group-vertical" disabled="">
