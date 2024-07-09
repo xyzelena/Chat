@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import AuthContext from '../../contexts/AuthContext.jsx';
+import AuthContext from '../../contexts/AuthContext.js';
 
 import {
   setItemStorage,

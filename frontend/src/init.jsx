@@ -6,13 +6,23 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-//import socket from './socket.js';
-
-import resources from './locales/index.js';
-
 import store from './store/index.js';
 
+import initSocket from './socket.js';
+
+import {
+  addChannel,
+  setEditChannel,
+  deleteChannel,
+} from './slices/channelsSlice.js';
+
+import { addMessage } from './slices/messagesSlice.js';
+
+import SocketContext from './contexts/SocketContext.js';
+
 import App from './components/App/App.jsx';
+
+import resources from './locales/index.js';
 
 const init = async () => {
   const i18n = i18next.createInstance();
@@ -33,9 +43,19 @@ const init = async () => {
       },
     });
 
+  const socket = initSocket(
+    store,
+    addChannel,
+    setEditChannel,
+    deleteChannel,
+    addMessage,
+  );
+
   return (
     <Provider store={store}>
-      <App />
+      <SocketContext.Provider value={socket}>
+        <App />
+      </SocketContext.Provider>
     </Provider>
   );
 };

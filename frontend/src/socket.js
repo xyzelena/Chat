@@ -1,9 +1,41 @@
-// import { io } from 'socket.io-client';
+import io from 'socket.io-client';
 
-// // "undefined" means the URL will be computed from the `window.location` object
-// const URL =
-//   process.env.NODE_ENV === 'production' ? undefined : 'http://localhost:5001';
+const initSocket = (
+  store,
+  addChannel,
+  setEditChannel,
+  deleteChannel,
+  addMessage,
+) => {
+  const socket = io();
 
-// const socket = io(URL);
+  const { dispatch } = store;
 
-// export default socket;
+  socket.on('connect_error', () => {
+    socket.connect();
+  });
+
+  socket.on('reconnect_attempt', () => {
+    socket.connect();
+  });
+
+  socket.on('newChannel', (newChannel) => {
+    dispatch(addChannel(newChannel));
+  });
+
+  socket.on('renameChannel', (updatedChannel) => {
+    dispatch(setEditChannel(updatedChannel));
+  });
+
+  socket.on('removeChannel', (id) => {
+    dispatch(deleteChannel(id));
+  });
+
+  socket.on('newMessage', (message) => {
+    dispatch(addMessage(message));
+  });
+
+  return socket;
+};
+
+export default initSocket;
