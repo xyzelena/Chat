@@ -1,25 +1,12 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 //import socket from '../../socket.js';
 
-import { useSendMessageMutation } from '../../api/messagesApi.js';
-
-const FormNewMessage = () => {
+const NewMessageForm = (props) => {
   const { t } = useTranslation();
 
-  const username = useSelector((state) => state.auth.username);
-  const channelId = useSelector(
-    (state) => state.currentChannel.currentChannelData.id,
-  );
-
-  const [
-    sendMessage,
-    { error: sendMessageError, isLoading: isSendingMessage },
-  ] = useSendMessageMutation();
-
-  const sendMessageHandler = (messageData) => sendMessage(messageData);
+  const { username, channelId, addMessageHandler } = props;
 
   const [message, setNewMessage] = useState('');
 
@@ -28,7 +15,7 @@ const FormNewMessage = () => {
 
     const newMessage = { body: message, username, channelId };
 
-    sendMessageHandler(newMessage);
+    addMessageHandler(newMessage);
 
     setNewMessage('');
   };
@@ -42,19 +29,20 @@ const FormNewMessage = () => {
       <div className="input-group has-validation">
         <input
           name="body"
-          aria-label={t('formNewMessage.ariaLabel')}
-          placeholder={t('formNewMessage.placeholder')}
+          required
+          aria-label={t('newMessageForm.ariaLabel')}
+          placeholder={t('newMessageForm.placeholder')}
           className="border-0 p-0 ps-2 form-control"
           value={message}
           onChange={(e) => setNewMessage(e.target.value)}
         />
 
         <button type="submit" className="btn btn-group-vertical" disabled="">
-          {t('formNewMessage.btnSubmit')}
+          {t('newMessageForm.btnSubmit')}
         </button>
       </div>
     </form>
   );
 };
 
-export default FormNewMessage;
+export default NewMessageForm;

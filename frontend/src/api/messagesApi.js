@@ -24,7 +24,7 @@ export const messagesApi = createApi({
       query: () => '',
       providesTags: ['Message'],
     }),
-    sendMessage: builder.mutation({
+    addMessage: builder.mutation({
       query: (newMessage) => ({
         method: 'POST',
         body: newMessage,
@@ -43,6 +43,6 @@ export const messagesApi = createApi({
 
 export const {
   useGetMessagesQuery,
-  useSendMessageMutation,
+  useAddMessageMutation,
   useRemoveMessageMutation,
 } = messagesApi;
