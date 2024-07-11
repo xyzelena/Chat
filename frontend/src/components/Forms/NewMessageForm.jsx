@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { BsFillSendPlusFill } from 'react-icons/bs';
+
 const NewMessageForm = (props) => {
   const { username, channelId, addMessageHandler } = props;
 
@@ -42,8 +44,16 @@ const NewMessageForm = (props) => {
           ref={refInputNewMessage}
         />
 
-        <button type="submit" className="btn btn-group-vertical" disabled="">
-          {t('newMessageForm.btnSubmit')}
+        <button
+          type="submit"
+          className="btn btn-group-vertical btn-lg"
+          disabled=""
+        >
+          <BsFillSendPlusFill />
+          <span className="visually-hidden">
+            {' '}
+            {t('newMessageForm.btnSubmit')}
+          </span>
         </button>
       </div>
     </form>
