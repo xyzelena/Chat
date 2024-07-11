@@ -1,8 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
-//import socket from '../../socket.js';
-
 const NewMessageForm = (props) => {
   const { username, channelId, addMessageHandler } = props;
 
@@ -15,7 +13,7 @@ const NewMessageForm = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const newMessage = { body: message, username, channelId };
+    const newMessage = { body: message.trim(), username, channelId };
 
     addMessageHandler(newMessage);
 

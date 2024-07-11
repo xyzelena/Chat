@@ -1,4 +1,16 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import useSocket from '../../hooks/useSocket.js';
+
+import {
+  addChannel,
+  setEditChannel,
+  deleteChannel,
+} from '../../slices/channelsSlice.js';
+
+import { addMessage } from '../../slices/messagesSlice.js';
 
 import AuthProvider from './AuthProvider.jsx';
 import PrivateRoute from './PrivateRoute.jsx';
@@ -15,6 +27,45 @@ import ROUTES from '../../utils/routes.js';
 import './App.css';
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  const socket = useSocket();
+
+  useEffect(() => {
+    socket.on('connect_error', () => {
+      socket.connect();
+    });
+
+    socket.on('reconnect_attempt', () => {
+      socket.connect();
+    });
+
+    socket.on('newChannel', (newChannel) => {
+      dispatch(addChannel(newChannel));
+    });
+
+    socket.on('renameChannel', (updatedChannel) => {
+      dispatch(setEditChannel(updatedChannel));
+    });
+
+    socket.on('removeChannel', (id) => {
+      dispatch(deleteChannel(id));
+    });
+
+    socket.on('newMessage', (message) => {
+      dispatch(addMessage(message));
+    });
+
+    return () => {
+      socket.off('connect_error');
+      socket.off('reconnect_attempt');
+      socket.off('newChannel');
+      socket.off('renameChannel');
+      socket.off('removeChannel');
+      socket.off('newMessage');
+    };
+  }, []);
+
   return (
     <AuthProvider>
       <BrowserRouter>

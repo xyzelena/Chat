@@ -10,14 +10,6 @@ import store from './store/index.js';
 
 import initSocket from './socket.js';
 
-import {
-  addChannel,
-  setEditChannel,
-  deleteChannel,
-} from './slices/channelsSlice.js';
-
-import { addMessage } from './slices/messagesSlice.js';
-
 import SocketContext from './contexts/SocketContext.js';
 
 import App from './components/App/App.jsx';
@@ -43,13 +35,7 @@ const init = async () => {
       },
     });
 
-  const socket = initSocket(
-    store,
-    addChannel,
-    setEditChannel,
-    deleteChannel,
-    addMessage,
-  );
+  const socket = initSocket();
 
   return (
     <Provider store={store}>
