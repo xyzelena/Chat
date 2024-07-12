@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 import useSocket from '../../hooks/useSocket.js';
@@ -21,6 +21,8 @@ const Messages = () => {
 
   const socket = useSocket();
 
+  const { t } = useTranslation();
+
   const { data, error, isLoading, refetch } = useGetMessagesQuery();
   //data => { id: '1', body: 'text message', channelId: '1', username: 'admin }
 
@@ -39,11 +41,11 @@ const Messages = () => {
     }
   }, [data, dispatch]);
 
-  // useEffect(() => {
-  //   if (addMessageError) {
-  //     toast.error(t('interface.messageSendError'));
-  //   }
-  // }, [addMessageError, t]);
+  useEffect(() => {
+    if (addMessageError) {
+      toast.error(t('errorsToast.messageSendError'));
+    }
+  }, [addMessageError, t]);
 
   const currentChannel = channels.find(
     (channel) => channel.id === currentChannelId,
@@ -61,16 +63,14 @@ const Messages = () => {
 
       socket.emit('newMessage', response.data, (acknowledgment) => {
         if (acknowledgment.error) {
-          console.log('Error sending message!!!!!!!');
-          // toast.error(t('interface.messageSendError'));
+          toast.error(t('errorsToast.messageSendError'));
         } else {
           console.log(acknowledgment.status);
-          // toast.success(t('interface.messageSent'));
         }
       });
     } catch (err) {
       console.error('Error sending message:', err);
-      // toast.error(t('interface.messageSendError'));
+      toast.error(t('errorsToast.messageSendError'));
     }
 
     refetch();

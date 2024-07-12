@@ -43,5 +43,9 @@ export default {
     channels: {
       header: 'Каналы',
     },
+
+    errorsToast: {
+      messageSendError: 'Ошибка отправки сообщения',
+    },
   },
 };
