@@ -2,6 +2,10 @@ import { useTranslation } from 'react-i18next';
 
 import { Link, Outlet } from 'react-router-dom';
 
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.min.css';
+
 import useAuth from '../../hooks/useAuth.js';
 
 import BtnExit from './BtnExit';
@@ -28,6 +32,8 @@ const Header = () => {
       <main>
         <Outlet />
       </main>
+
+      <ToastContainer />
     </>
   );
 };
