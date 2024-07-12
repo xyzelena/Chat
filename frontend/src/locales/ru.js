@@ -45,6 +45,7 @@ export default {
     },
 
     errorsToast: {
+      networkError: 'Ошибка соединения',
       messageSendError: 'Ошибка отправки сообщения',
     },
   },
