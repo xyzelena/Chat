@@ -1,7 +1,8 @@
 import { useRef, useEffect } from 'react';
+import Spinner from 'react-bootstrap/Spinner';
 
 const ListMessages = (props) => {
-  const { currentChannelMessages } = props;
+  const { currentChannelMessages, isLoading } = props;
 
   const messagesEndRef = useRef(null);
 
@@ -10,6 +11,14 @@ const ListMessages = (props) => {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [currentChannelMessages]);
+
+  if (isLoading) {
+    return (
+      <div className="d-flex justify-content-center">
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
 
   return (
     <div>
