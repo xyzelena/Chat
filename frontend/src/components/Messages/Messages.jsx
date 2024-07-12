@@ -23,7 +23,12 @@ const Messages = () => {
 
   const { t } = useTranslation();
 
-  const { data, error, isLoading, refetch } = useGetMessagesQuery();
+  const {
+    data,
+    error: getMessageError,
+    isLoading: isGettingMessage,
+    refetch,
+  } = useGetMessagesQuery();
   //data => { id: '1', body: 'text message', channelId: '1', username: 'admin }
 
   const [addMessage, { error: addMessageError, isLoading: isAddingMessage }] =
@@ -87,7 +92,10 @@ const Messages = () => {
 
       <div id="messages-box" className="chat-messages overflow-auto px-5">
         {countCurrentChannelMessages > 0 && (
-          <ListMessages currentChannelMessages={currentChannelMessages} />
+          <ListMessages
+            currentChannelMessages={currentChannelMessages}
+            isLoading={isGettingMessage}
+          />
         )}
       </div>
 
