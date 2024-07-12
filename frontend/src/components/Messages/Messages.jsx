@@ -31,7 +31,6 @@ const Messages = () => {
       const response = await addMessage(messageData);
 
       socket.emit('newMessage', response.data, (acknowledgment) => {
-        console.log(acknowledgment.status);
         if (acknowledgment.error) {
           console.log('Error sending message!!!!!!!');
           // toast.error(t('interface.messageSendError'));

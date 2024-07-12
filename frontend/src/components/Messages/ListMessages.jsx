@@ -13,7 +13,3 @@ const ListMessages = (props) => {
 };
 
 export default ListMessages;
-
-// <div className="text-break mb-2">
-// <b>admin</b>: msg 1
-// </div>
