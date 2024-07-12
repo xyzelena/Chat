@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { toast } from 'react-toastify';
+
 import useSocket from '../../hooks/useSocket.js';
 
 import {
@@ -20,11 +22,38 @@ const Messages = () => {
   const socket = useSocket();
 
   const { data, error, isLoading, refetch } = useGetMessagesQuery();
-  //console.log(data);
-  //{ id: '1', body: 'text message', channelId: '1', username: 'admin }
+  //data => { id: '1', body: 'text message', channelId: '1', username: 'admin }
 
   const [addMessage, { error: addMessageError, isLoading: isAddingMessage }] =
     useAddMessageMutation();
+
+  const { messages } = useSelector((state) => state.messages);
+
+  const { channels, currentChannelId } = useSelector((state) => state.channels);
+
+  const username = useSelector((state) => state.auth.username);
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setMessages(data));
+    }
+  }, [data, dispatch]);
+
+  // useEffect(() => {
+  //   if (addMessageError) {
+  //     toast.error(t('interface.messageSendError'));
+  //   }
+  // }, [addMessageError, t]);
+
+  const currentChannel = channels.find(
+    (channel) => channel.id === currentChannelId,
+  );
+
+  const currentChannelMessages = messages.filter(
+    (message) => message.channelId === currentChannelId,
+  );
+
+  const countCurrentChannelMessages = currentChannelMessages.length;
 
   const addMessageHandler = async (messageData) => {
     try {
@@ -46,35 +75,6 @@ const Messages = () => {
 
     refetch();
   };
-
-  useEffect(() => {
-    if (data) {
-      dispatch(setMessages(data));
-    }
-  }, [data, dispatch]);
-
-  useEffect(() => {
-    if (addMessageError) {
-      console.log(addMessageError);
-      //toast.error(t('interface.messageSendError'));
-    }
-  }, [addMessageError]);
-
-  //[addMessageError, t]);
-
-  const { messages } = useSelector((state) => state.messages);
-  const { channels, currentChannelId } = useSelector((state) => state.channels);
-  const username = useSelector((state) => state.auth.username);
-
-  const currentChannel = channels.find(
-    (channel) => channel.id === currentChannelId,
-  );
-
-  const currentChannelMessages = messages.filter(
-    (message) => message.channelId === currentChannelId,
-  );
-
-  const countCurrentChannelMessages = currentChannelMessages.length;
 
   return (
     <>

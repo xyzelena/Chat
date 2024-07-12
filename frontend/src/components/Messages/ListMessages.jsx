@@ -1,5 +1,15 @@
+import { useRef, useEffect } from 'react';
+
 const ListMessages = (props) => {
   const { currentChannelMessages } = props;
+
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [currentChannelMessages]);
 
   return (
     <div>
@@ -8,6 +18,8 @@ const ListMessages = (props) => {
           <b>{message.username}</b>: {message.body}
         </div>
       ))}
+
+      <div ref={messagesEndRef} />
     </div>
   );
 };
