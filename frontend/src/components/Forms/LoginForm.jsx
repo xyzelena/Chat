@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Form } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
 import { useFormik } from 'formik';
 
@@ -23,8 +24,6 @@ const LoginForm = () => {
 
   const [validAuth, setValidAuth] = useState(null);
   const [error, setError] = useState('');
-
-  const networkErrCode = 401;
 
   useEffect(() => {
     refUsername.current.focus();
@@ -69,11 +68,12 @@ const LoginForm = () => {
           setValidAuth(true);
         }
       } catch (err) {
-        setValidAuth(false);
-        setError(t('loginForm.invalidCredentials'));
-
-        if (err.response && err.response.status === networkErrCode) {
-          logOut();
+        if (err.code === 'ERR_NETWORK') {
+          toast.error(t('errorsToast.networkError'));
+          //logOut();
+        } else {
+          setValidAuth(false);
+          setError(t('loginForm.invalidCredentials'));
         }
       }
     },
