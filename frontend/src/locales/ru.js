@@ -44,6 +44,12 @@ export default {
       header: 'Каналы',
     },
 
+    addChannelModal: {
+      title: 'Добавить канал',
+      btnСancel: 'Отменить',
+      btnSend: 'Отправить',
+    },
+
     errorsToast: {
       networkError: 'Ошибка соединения',
       messageSendError: 'Ошибка отправки сообщения',
