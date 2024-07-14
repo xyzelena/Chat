@@ -6,6 +6,12 @@ import { BsFilePlus } from 'react-icons/bs';
 
 import { useGetChannelsQuery } from '../../api/channelsApi.js';
 
+import { setModalVisibility } from '../../slices/modalsSlice.js';
+
+import Modals from '../Modals/Modals.jsx';
+
+import typesChannelModal from '../../utils/typesChannelModal.js';
+
 import {
   setChannels,
   setCurrentChannelId,
@@ -35,12 +41,26 @@ const Channels = () => {
 
   const { channels, currentChannelId } = useSelector((state) => state.channels);
 
+  const showAddChannelModal = () => {
+    dispatch(
+      setModalVisibility({
+        isVisible: true,
+        type: typesChannelModal.ADD_CHANNEL(),
+        extraData: {},
+      }),
+    );
+  };
+
   return (
     <>
       <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
         <b>{t('channels.header')}</b>
 
-        <button type="button" className="p-0 btn btn-group-vertical btn-lg">
+        <button
+          type="button"
+          className="p-0 btn btn-group-vertical btn-lg"
+          onClick={showAddChannelModal}
+        >
           <BsFilePlus />
           <span className="visually-hidden">+</span>
         </button>
@@ -51,6 +71,8 @@ const Channels = () => {
         currentChannelId={currentChannelId}
         handleCurrentChannelId={handleCurrentChannelId}
       />
+
+      <Modals />
     </>
   );
 };

@@ -25,3 +25,6 @@ const modalsSlice = createSlice({
 export const { setModalVisibility, resetModalState } = modalsSlice.actions;
 
 export default modalsSlice.reducer;
+
+//   dispatch(setModalVisibility
+// ({ isVisible: true, type: 'removeChannel', extraData: { currentModalChannelId: channel.id } }));
