@@ -1,16 +1,16 @@
 const ROUTES = {
-  baseURL: '/api/v1',
+  baseURL: () => '/api/v1',
 
-  home: '/',
-  login: '/login',
-  signup: '/signup',
-  channels: '/channels',
-  messages: '/messages',
+  home: () => '/',
+  login: () => '/login',
+  signup: () => '/signup',
+  channels: () => '/channels',
+  messages: () => '/messages',
 
-  loginApi: '/api/v1/login',
-  signupApi: '/api/v1/signup',
-  channelsApi: '/api/v1/channels',
-  messagesApi: '/api/v1/messages',
+  loginApi: () => '/api/v1/login',
+  signupApi: () => '/api/v1/signup',
+  channelsApi: () => '/api/v1/channels',
+  messagesApi: () => '/api/v1/messages',
 };
 
 export default ROUTES;

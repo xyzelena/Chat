@@ -7,7 +7,7 @@ import { getItemStorage } from '../utils/authLocalStorage.js';
 export const messagesApi = createApi({
   reducerPath: 'messagesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: ROUTES.messagesApi,
+    baseUrl: ROUTES.messagesApi(),
     prepareHeaders: (headers) => {
       const userId = getItemStorage();
 

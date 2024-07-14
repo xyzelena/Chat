@@ -49,7 +49,7 @@ const LoginForm = () => {
   }, [validAuth]);
 
   useEffect(() => {
-    if (validAuth) navigate(ROUTES.home, { replace: false });
+    if (validAuth) navigate(ROUTES.home(), { replace: false });
   }, [validAuth, navigate]);
 
   const formik = useFormik({
@@ -61,7 +61,7 @@ const LoginForm = () => {
       setError('');
 
       try {
-        const response = await axiosApi.post(ROUTES.login, valuesForm);
+        const response = await axiosApi.post(ROUTES.login(), valuesForm);
         //console.log(response.data); // => { token: ..., username: 'admin' }
         if (response.data.token) {
           logIn(response.data);

@@ -5,6 +5,8 @@ import LoginForm from '../../components/Forms/LoginForm.jsx';
 
 import img from '../../assets/images/login.jpg';
 
+import ROUTES from '../../utils/routes.js';
+
 const Login = () => {
   const { t } = useTranslation();
 
@@ -24,7 +26,7 @@ const Login = () => {
 
       <div className="container_enteringData_footer">
         <span>{t('loginPage.noRegistrationQuestion')}</span>
-        <Link to="/signup">{t('loginPage.btnGetRegistration')}</Link>
+        <Link to={ROUTES.signup()}>{t('loginPage.btnGetRegistration')}</Link>
       </div>
     </div>
   );

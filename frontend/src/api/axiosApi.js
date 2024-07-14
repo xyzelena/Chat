@@ -1,11 +1,8 @@
 import axios from 'axios';
-
-import { getItemStorage } from '../utils/authLocalStorage.js';
-
 import ROUTES from '../utils/routes.js';
 
 const axiosApi = axios.create({
-  baseURL: ROUTES.baseURL,
+  baseURL: ROUTES.baseURL(),
   timeout: 5000,
 });
 

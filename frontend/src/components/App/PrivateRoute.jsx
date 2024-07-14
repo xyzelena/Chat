@@ -2,6 +2,8 @@ import { Navigate, useLocation } from 'react-router-dom';
 
 import useAuth from '../../hooks/useAuth.js';
 
+import ROUTES from '../../utils/routes.js';
+
 const PrivateRoute = ({ children }) => {
   const authHandle = useAuth();
   const location = useLocation();
@@ -9,7 +11,7 @@ const PrivateRoute = ({ children }) => {
   return authHandle.loggedIn ? (
     children
   ) : (
-    <Navigate to="/login" state={{ from: location }} />
+    <Navigate to={ROUTES.login()} state={{ from: location }} />
   );
 };
 
