@@ -70,7 +70,7 @@ const App = () => {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Header />}>
+          <Route path={ROUTES.home()} element={<Header />}>
             <Route
               index
               element={
@@ -79,8 +79,8 @@ const App = () => {
                 </PrivateRoute>
               }
             />
-            <Route path={ROUTES.login} element={<Login />} />
-            <Route path={ROUTES.signup} element={<SignUp />} />
+            <Route path={ROUTES.login()} element={<Login />} />
+            <Route path={ROUTES.signup()} element={<SignUp />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
