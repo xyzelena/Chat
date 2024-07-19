@@ -1,26 +1,20 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import Modal from 'react-bootstrap/Modal';
 
-import { resetModalState } from '../../slices/modalsSlice.js';
+import useChannelModal from '../../hooks/useChannelModal.js';
 
 import AddChannelForm from '../Forms/AddChannelForm.jsx';
 
-import typesChannelModal from '../../utils/typesChannelModal.js';
+import TYPES_MODAL from '../../utils/typesModal.js';
 
 const AddChannelModal = () => {
   const dispatch = useDispatch();
 
-  const { t } = useTranslation();
+  const { handleCloseCurrentModal, t } = useChannelModal();
 
-  const modalStateVisible = useSelector((state) => state.modals.isVisible);
+  const { isVisible, type } = useSelector((state) => state.modals);
 
-  const modalStateType = useSelector((state) => state.modals.type);
-
-  const isCurrentModalVisible =
-    modalStateType === typesChannelModal.ADD_CHANNEL() && modalStateVisible;
-
-  const handleCloseCurrentModal = () => dispatch(resetModalState());
+  const isCurrentModalVisible = type === TYPES_MODAL.ADD_CHANNEL() && isVisible;
 
   return (
     <Modal
@@ -34,22 +28,10 @@ const AddChannelModal = () => {
       </Modal.Header>
 
       <Modal.Body>
-        <AddChannelForm handleCloseCurrentModal={handleCloseCurrentModal} />
+        <AddChannelForm />
       </Modal.Body>
     </Modal>
   );
 };
 
 export default AddChannelModal;
-
-/* 
-  import Button from 'react-bootstrap/Button';
-
-  <Modal.Footer>
-<Button variant="secondary" onClick={handleClose}>
-  {t('addChannelModal.btnСancel')}
-</Button>
-<Button variant="primary" onClick={handleClose}>
-  {t('addChannelModal.btnSend')}
-</Button>
-</Modal.Footer> */

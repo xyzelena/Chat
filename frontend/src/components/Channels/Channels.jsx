@@ -1,70 +1,80 @@
 import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
-import { BsFilePlus } from 'react-icons/bs';
+import { toast } from 'react-toastify';
 
 import { useGetChannelsQuery } from '../../api/channelsApi.js';
-
-import { setModalVisibility } from '../../slices/modalsSlice.js';
-
-import Modals from '../Modals/Modals.jsx';
-
-import typesChannelModal from '../../utils/typesChannelModal.js';
 
 import {
   setChannels,
   setCurrentChannelId,
 } from '../../slices/channelsSlice.js';
 
+import {
+  setModalVisibility,
+  resetModalState,
+} from '../../slices/modalsSlice.js';
+
+import HeaderListChannels from './HeaderListChannels.jsx';
+
 import ListChannels from './ListChannels.jsx';
+
+import AddChannelModal from '../Modals/AddChannelModal.jsx';
+
+import ChannelModalContext from '../../contexts/ChannelModalContext.js';
+
+import TYPES_MODAL from '../../utils/typesModal.js';
 
 const Channels = () => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
 
-  const { data, error, isLoading, refetch } = useGetChannelsQuery();
+  const { channels, currentChannelId } = useSelector((state) => state.channels);
+
+  const handleCurrentChannelId = (idChannel) => {
+    dispatch(setCurrentChannelId(idChannel));
+  };
+
+  const {
+    data,
+    error: getChannelsError,
+    isLoading: isGettingChannels,
+    refetch,
+  } = useGetChannelsQuery();
   // console.log(data);
   // {id: '1', name: 'general', removable: false}
 
   useEffect(() => {
     if (data) {
       dispatch(setChannels(data));
-      dispatch(setCurrentChannelId(data[0].id));
+
+      if (currentChannelId === null) handleCurrentChannelId(data[0].id);
     }
   }, [data, dispatch]);
 
-  const handleCurrentChannelId = (idChannel) => {
-    dispatch(setCurrentChannelId(idChannel));
-  };
-
-  const { channels, currentChannelId } = useSelector((state) => state.channels);
+  useEffect(() => {
+    if (getChannelsError) {
+      toast.error(t('errorsToast.networkError'));
+    }
+  }, [getChannelsError, t]);
 
   const showAddChannelModal = () => {
     dispatch(
       setModalVisibility({
         isVisible: true,
-        type: typesChannelModal.ADD_CHANNEL(),
+        type: TYPES_MODAL.ADD_CHANNEL(),
         extraData: {},
       }),
     );
   };
 
+  const handleCloseCurrentModal = () => dispatch(resetModalState());
+
   return (
     <>
-      <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
-        <b>{t('channels.header')}</b>
-
-        <button
-          type="button"
-          className="p-0 btn btn-group-vertical btn-lg"
-          onClick={showAddChannelModal}
-        >
-          <BsFilePlus />
-          <span className="visually-hidden">+</span>
-        </button>
-      </div>
+      <HeaderListChannels t={t} showAddChannelModal={showAddChannelModal} />
 
       <ListChannels
         channels={channels}
@@ -72,7 +82,11 @@ const Channels = () => {
         handleCurrentChannelId={handleCurrentChannelId}
       />
 
-      <Modals />
+      <ChannelModalContext.Provider
+        value={{ handleCloseCurrentModal, t, refetch, handleCurrentChannelId }}
+      >
+        <AddChannelModal />
+      </ChannelModalContext.Provider>
     </>
   );
 };
