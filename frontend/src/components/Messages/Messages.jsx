@@ -73,12 +73,12 @@ const Messages = () => {
           console.log(acknowledgment.status);
         }
       });
+
+      refetch();
     } catch (err) {
       console.error('Error sending message:', err);
       toast.error(t('errorsToast.messageSendError'));
     }
-
-    refetch();
   };
 
   return (
