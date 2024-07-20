@@ -83,7 +83,13 @@ const Channels = () => {
       />
 
       <ChannelModalContext.Provider
-        value={{ handleCloseCurrentModal, t, refetch, handleCurrentChannelId }}
+        value={{
+          handleCloseCurrentModal,
+          t,
+          refetch,
+          handleCurrentChannelId,
+          channels,
+        }}
       >
         <AddChannelModal />
       </ChannelModalContext.Provider>

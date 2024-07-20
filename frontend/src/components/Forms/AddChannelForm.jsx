@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
-import { useFormik } from 'formik';
+import { useFormik, ErrorMessage } from 'formik';
+
+import * as Yup from 'yup';
+
+import cn from 'classnames';
 
 import useChannelModal from '../../hooks/useChannelModal.js';
 
@@ -12,22 +15,22 @@ import useSocket from '../../hooks/useSocket.js';
 import { useAddChannelMutation } from '../../api/channelsApi.js';
 
 const AddChannelForm = () => {
-  const { handleCloseCurrentModal, t, refetch, handleCurrentChannelId } =
-    useChannelModal();
+  const {
+    handleCloseCurrentModal,
+    t,
+    refetch,
+    handleCurrentChannelId,
+    channels,
+  } = useChannelModal();
+
+  const namesChannels = channels.map((channel) => channel.name);
 
   const [addChannel, { error: addChannelError, isLoading: isAddingChannel }] =
     useAddChannelMutation();
 
   const socket = useSocket();
 
-  const navigate = useNavigate();
-
-  const [validNameChannel, setValidNameChannel] = useState(null);
-
-  const [error, setError] = useState('');
-
   const refInputName = useRef();
-  const refFeedback = useRef();
 
   useEffect(() => {
     refInputName.current.focus();
@@ -37,14 +40,36 @@ const AddChannelForm = () => {
     if (isAddingChannel) {
       toast.info(t('infoToast.channelAdding'));
     }
-  }, [isAddingChannel]);
+  }, [isAddingChannel, t]);
+
+  const schema = Yup.object().shape({
+    name: Yup.string()
+      .min(3, 'Too Short!')
+      .max(20, 'Too Long!')
+      .required('Required')
+      .notOneOf(namesChannels, 'name must be uniq'),
+  });
+
+  Yup.setLocale({
+    mixed: {
+      name: 'name',
+      min: 'min',
+      max: 'max',
+      required: 'required',
+      notOneOf: 'notOneOf',
+      default: 'name',
+    },
+  });
 
   const formik = useFormik({
     initialValues: {
       name: '',
     },
+
+    validationSchema: schema,
+
     onSubmit: async (valuesForm) => {
-      setError('');
+      // setError('');
 
       try {
         const response = await addChannel(valuesForm);
@@ -78,16 +103,22 @@ const AddChannelForm = () => {
         name="name"
         id="name"
         type="text"
-        className="mb-2 form-control"
         required
         onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
         value={formik.values.name}
         ref={refInputName}
+        className={cn('mb-2', 'form-control', {
+          'is-valid': formik.touched.name && !formik.errors.name,
+          'is-invalid': formik.touched.name && formik.errors.name,
+        })}
       />
 
-      <div className="invalid-feedback" ref={refFeedback}>
-        {error}
-      </div>
+      {formik.touched.name && formik.errors.name ? (
+        <div className="invalid-feedback" style={{ display: 'block' }}>
+          {formik.errors.name}
+        </div>
+      ) : null}
 
       <div className="d-flex justify-content-end">
         <button
