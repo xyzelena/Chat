@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
-import { useFormik, ErrorMessage } from 'formik';
-
-import * as Yup from 'yup';
+import { useFormik } from 'formik';
 
 import cn from 'classnames';
+
+import schemaValidationYup from '../../utils/schemaValidationYup.js';
 
 import useChannelModal from '../../hooks/useChannelModal.js';
 
@@ -23,14 +23,16 @@ const AddChannelForm = () => {
     channels,
   } = useChannelModal();
 
-  const namesChannels = channels.map((channel) => channel.name);
-
-  const [addChannel, { error: addChannelError, isLoading: isAddingChannel }] =
-    useAddChannelMutation();
-
   const socket = useSocket();
 
   const refInputName = useRef();
+
+  const namesChannels = channels.map((channel) => channel.name);
+
+  const schema = schemaValidationYup(namesChannels, t);
+
+  const [addChannel, { error: addChannelError, isLoading: isAddingChannel }] =
+    useAddChannelMutation();
 
   useEffect(() => {
     refInputName.current.focus();
@@ -42,25 +44,6 @@ const AddChannelForm = () => {
     }
   }, [isAddingChannel, t]);
 
-  const schema = Yup.object().shape({
-    name: Yup.string()
-      .min(3, 'Too Short!')
-      .max(20, 'Too Long!')
-      .required('Required')
-      .notOneOf(namesChannels, 'name must be uniq'),
-  });
-
-  Yup.setLocale({
-    mixed: {
-      name: 'name',
-      min: 'min',
-      max: 'max',
-      required: 'required',
-      notOneOf: 'notOneOf',
-      default: 'name',
-    },
-  });
-
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -69,8 +52,6 @@ const AddChannelForm = () => {
     validationSchema: schema,
 
     onSubmit: async (valuesForm) => {
-      // setError('');
-
       try {
         const response = await addChannel(valuesForm);
 
@@ -126,11 +107,11 @@ const AddChannelForm = () => {
           className="me-2 btn btn-secondary"
           onClick={handleCloseCurrentModal}
         >
-          {t('addChannelModal.btnСancel')}
+          {t('buttons.btnСancel')}
         </button>
 
         <button type="submit" className="btn btn-primary">
-          {t('addChannelModal.btnSend')}
+          {t('buttons.btnSend')}
         </button>
       </div>
     </Form>
