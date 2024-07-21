@@ -2,7 +2,13 @@ export default {
   translation: {
     baseTextUI: {
       header: 'Чат',
+    },
+
+    buttons: {
       btnExit: 'Выйти',
+      btnEnter: 'Войти',
+      btnСancel: 'Отменить',
+      btnSend: 'Отправить',
     },
 
     notFoundPage: {
@@ -24,7 +30,6 @@ export default {
     loginForm: {
       login: 'Ваш ник',
       password: 'Пароль',
-      btnSubmit: 'Войти',
       invalidCredentials: 'Неверные имя пользователя или пароль',
     },
 
@@ -37,7 +42,6 @@ export default {
     newMessageForm: {
       ariaLabel: 'Новое сообщение',
       placeholder: 'Введите сообщение...',
-      btnSubmit: 'Отправить',
     },
 
     channels: {
@@ -47,8 +51,14 @@ export default {
     addChannelModal: {
       title: 'Добавить канал',
       label: 'Имя канала',
-      btnСancel: 'Отменить',
-      btnSend: 'Отправить',
+    },
+
+    errorsValidation: {
+      min: 'От 3 до 20 символов',
+      max: 'От 3 до 20 символов',
+      required: 'Обязательное поле',
+      notOneOf: 'Должно быть уникальным',
+      name: 'Обязательное поле',
     },
 
     errorsToast: {

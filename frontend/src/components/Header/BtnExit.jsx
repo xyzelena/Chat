@@ -9,7 +9,7 @@ const BtnExit = () => {
 
   return (
     <button type="button" className="btn btn-primary" onClick={() => logOut()}>
-      {t('baseTextUI.btnExit')}
+      {t('buttons.btnExit')}
     </button>
   );
 };

@@ -115,7 +115,7 @@ const LoginForm = () => {
         </div>
       </div>
 
-      <button type="submit">{t('loginForm.btnSubmit')}</button>
+      <button type="submit">{t('buttons.btnEnter')}</button>
     </Form>
   );
 };
