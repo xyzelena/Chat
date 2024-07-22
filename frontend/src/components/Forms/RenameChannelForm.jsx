@@ -14,7 +14,7 @@ import useSocket from '../../hooks/useSocket.js';
 
 import { useAddChannelMutation } from '../../api/channelsApi.js';
 
-const AddChannelForm = () => {
+const RenameChannelForm = () => {
   const {
     handleCloseCurrentModal,
     t,
@@ -118,4 +118,4 @@ const AddChannelForm = () => {
   );
 };
 
-export default AddChannelForm;
+export default RenameChannelForm;

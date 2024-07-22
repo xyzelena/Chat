@@ -51,9 +51,10 @@ export default {
       labelToggle: 'Управление каналом',
     },
 
-    addChannelModal: {
-      title: 'Добавить канал',
-      label: 'Имя канала',
+    channelModals: {
+      titleAddChannel: 'Добавить канал',
+      titleRenameChannel: 'Переименовать канал',
+      labelNameChannel: 'Имя канала',
     },
 
     errorsValidation: {

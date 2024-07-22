@@ -1,15 +1,13 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Modal from 'react-bootstrap/Modal';
 
-import useChannelModal from '../../hooks/useChannelModal.js';
+import useChannelModal from '../../../hooks/useChannelModal.js';
 
-import AddChannelForm from '../Forms/AddChannelForm.jsx';
+import AddChannelForm from '../../Forms/AddChannelForm.jsx';
 
-import TYPES_MODAL from '../../utils/typesModal.js';
+import TYPES_MODAL from '../../../utils/typesModal.js';
 
 const AddChannelModal = () => {
-  const dispatch = useDispatch();
-
   const { handleCloseCurrentModal, t } = useChannelModal();
 
   const { isVisible, type } = useSelector((state) => state.modals);
@@ -24,7 +22,7 @@ const AddChannelModal = () => {
       onHide={handleCloseCurrentModal}
     >
       <Modal.Header closeButton>
-        <Modal.Title>{t('addChannelModal.title')}</Modal.Title>
+        <Modal.Title>{t('channelModals.titleAddChannel')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
