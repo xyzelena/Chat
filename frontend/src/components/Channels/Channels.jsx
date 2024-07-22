@@ -20,13 +20,11 @@ import HeaderListChannels from './HeaderListChannels.jsx';
 
 import ListChannels from './ListChannels.jsx';
 
-import AddChannelModal from '../Modals/AddChannelModal.jsx';
+import Modals from '../Modals/Channels/Modals.jsx';
 
 import ChannelContext from '../../contexts/ChannelContext.js';
 
 import ChannelModalContext from '../../contexts/ChannelModalContext.js';
-
-import TYPES_MODAL from '../../utils/typesModal.js';
 
 const Channels = () => {
   const { t } = useTranslation();
@@ -62,12 +60,11 @@ const Channels = () => {
     }
   }, [getChannelsError]);
 
-  const showAddChannelModal = () => {
+  const showChannelModal = (typeModal) => {
     dispatch(
       setModalVisibility({
         isVisible: true,
-        type: TYPES_MODAL.ADD_CHANNEL(),
-        extraData: {},
+        type: typeModal,
       }),
     );
   };
@@ -76,13 +73,14 @@ const Channels = () => {
 
   return (
     <>
-      <HeaderListChannels t={t} showAddChannelModal={showAddChannelModal} />
+      <HeaderListChannels t={t} showChannelModal={showChannelModal} />
 
       <ChannelContext.Provider
         value={{
           channels,
           currentChannelId,
           handleCurrentChannelId,
+          showChannelModal,
           t,
         }}
       >
@@ -91,14 +89,15 @@ const Channels = () => {
 
       <ChannelModalContext.Provider
         value={{
-          handleCloseCurrentModal,
-          t,
-          refetch,
-          handleCurrentChannelId,
           channels,
+          currentChannelId,
+          handleCurrentChannelId,
+          handleCloseCurrentModal,
+          refetch,
+          t,
         }}
       >
-        <AddChannelModal />
+        <Modals />
       </ChannelModalContext.Provider>
     </>
   );
