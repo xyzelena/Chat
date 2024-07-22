@@ -50,7 +50,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (validAuth) navigate(ROUTES.home(), { replace: false });
-  }, [validAuth, navigate]);
+  }, [validAuth]);
 
   const formik = useFormik({
     initialValues: {

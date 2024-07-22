@@ -1,16 +1,7 @@
-import { useRef, useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 
 const ListMessages = (props) => {
   const { currentChannelMessages, isLoading } = props;
-
-  const messagesEndRef = useRef(null);
-
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [currentChannelMessages]);
 
   if (isLoading) {
     return (
@@ -27,8 +18,6 @@ const ListMessages = (props) => {
           <b>{message.username}</b>: {message.body}
         </div>
       ))}
-
-      <div ref={messagesEndRef} />
     </div>
   );
 };

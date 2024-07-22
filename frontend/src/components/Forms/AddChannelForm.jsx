@@ -42,7 +42,7 @@ const AddChannelForm = () => {
     if (isAddingChannel) {
       toast.info(t('infoToast.channelAdding'));
     }
-  }, [isAddingChannel, t]);
+  }, [isAddingChannel]);
 
   const formik = useFormik({
     initialValues: {
