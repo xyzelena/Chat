@@ -22,6 +22,8 @@ import ListChannels from './ListChannels.jsx';
 
 import AddChannelModal from '../Modals/AddChannelModal.jsx';
 
+import ChannelContext from '../../contexts/ChannelContext.js';
+
 import ChannelModalContext from '../../contexts/ChannelModalContext.js';
 
 import TYPES_MODAL from '../../utils/typesModal.js';
@@ -52,13 +54,13 @@ const Channels = () => {
 
       if (currentChannelId === null) handleCurrentChannelId(data[0].id);
     }
-  }, [data, dispatch]);
+  }, [data]);
 
   useEffect(() => {
     if (getChannelsError) {
       toast.error(t('errorsToast.networkError'));
     }
-  }, [getChannelsError, t]);
+  }, [getChannelsError]);
 
   const showAddChannelModal = () => {
     dispatch(
@@ -76,11 +78,16 @@ const Channels = () => {
     <>
       <HeaderListChannels t={t} showAddChannelModal={showAddChannelModal} />
 
-      <ListChannels
-        channels={channels}
-        currentChannelId={currentChannelId}
-        handleCurrentChannelId={handleCurrentChannelId}
-      />
+      <ChannelContext.Provider
+        value={{
+          channels,
+          currentChannelId,
+          handleCurrentChannelId,
+          t,
+        }}
+      >
+        <ListChannels />
+      </ChannelContext.Provider>
 
       <ChannelModalContext.Provider
         value={{
