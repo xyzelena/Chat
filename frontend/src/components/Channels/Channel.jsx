@@ -5,10 +5,13 @@ import cn from 'classnames';
 
 import useChannel from '../../hooks/useChannel';
 
+import TYPES_MODAL from '../../utils/typesModal.js';
+
 const Channel = (props) => {
   const { channel } = props;
 
-  const { currentChannelId, handleCurrentChannelId, t } = useChannel();
+  const { currentChannelId, handleCurrentChannelId, showChannelModal, t } =
+    useChannel();
 
   const btnChannelNameClass = cn(
     'w-100',
@@ -52,10 +55,16 @@ const Channel = (props) => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">
+              <Dropdown.Item
+                href="#"
+                onClick={() => showChannelModal(TYPES_MODAL.DELETE_CHANNEL)}
+              >
                 {t('buttons.btnDelete')}
               </Dropdown.Item>
-              <Dropdown.Item href="#/action-2">
+              <Dropdown.Item
+                href="#"
+                onClick={() => showChannelModal(TYPES_MODAL.RENAME_CHANNEL)}
+              >
                 {t('buttons.btnRename')}
               </Dropdown.Item>
             </Dropdown.Menu>
