@@ -9,6 +9,8 @@ export default {
       btnEnter: 'Войти',
       btnСancel: 'Отменить',
       btnSend: 'Отправить',
+      btnDelete: 'Удалить',
+      btnRename: 'Переименовать',
     },
 
     notFoundPage: {
@@ -46,6 +48,7 @@ export default {
 
     channels: {
       header: 'Каналы',
+      labelToggle: 'Управление каналом',
     },
 
     addChannelModal: {
