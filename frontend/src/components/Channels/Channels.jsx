@@ -50,7 +50,7 @@ const Channels = () => {
     if (data) {
       dispatch(setChannels(data));
 
-      if (currentChannelId === null) handleCurrentChannelId(data[0].id);
+      if (!currentChannelId) handleCurrentChannelId(data[0].id);
     }
   }, [data]);
 

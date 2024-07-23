@@ -57,7 +57,7 @@ const Channel = (props) => {
             <Dropdown.Menu>
               <Dropdown.Item
                 href="#"
-                onClick={() => showChannelModal(TYPES_MODAL.DELETE_CHANNEL())}
+                onClick={() => showChannelModal(TYPES_MODAL.REMOVE_CHANNEL())}
               >
                 {t('buttons.btnDelete')}
               </Dropdown.Item>
