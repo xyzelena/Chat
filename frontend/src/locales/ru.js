@@ -54,7 +54,9 @@ export default {
     channelModals: {
       titleAddChannel: 'Добавить канал',
       titleRenameChannel: 'Переименовать канал',
+      titleRemoveChannel: 'Удалить канал',
       labelNameChannel: 'Имя канала',
+      questionRemoveChannel: 'Уверены?',
     },
 
     errorsValidation: {
@@ -70,11 +72,13 @@ export default {
       messageSendError: 'Ошибка отправки сообщения',
       channelAddError: 'Ошибка добавления канала',
       channelEditError: 'Ошибка переименования канала',
+      channelRemoveError: 'Ошибка удаления канала',
     },
 
     infoToast: {
       channelAdding: 'Добавление канала...',
       channelEditing: 'Переименование...',
+      channelRemoving: 'Удаление канала...',
     },
   },
 };

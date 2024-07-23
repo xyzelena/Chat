@@ -7,7 +7,7 @@ import useSocket from '../../hooks/useSocket.js';
 import {
   addChannel,
   setEditChannel,
-  deleteChannel,
+  removeChannel,
 } from '../../slices/channelsSlice.js';
 
 import { addMessage } from '../../slices/messagesSlice.js';
@@ -49,7 +49,7 @@ const App = () => {
     });
 
     socket.on('removeChannel', (id) => {
-      dispatch(deleteChannel(id));
+      dispatch(removeChannel(id));
     });
 
     socket.on('newMessage', (message) => {
