@@ -44,13 +44,13 @@ const Messages = () => {
     if (data) {
       dispatch(setMessages(data));
     }
-  }, [data, dispatch]);
+  }, [data]);
 
   useEffect(() => {
     if (addMessageError) {
       toast.error(t('errorsToast.messageSendError'));
     }
-  }, [addMessageError, t]);
+  }, [addMessageError]);
 
   const currentChannel = channels.find(
     (channel) => channel.id === currentChannelId,
