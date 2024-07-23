@@ -20,7 +20,7 @@ import HeaderListChannels from './HeaderListChannels.jsx';
 
 import ListChannels from './ListChannels.jsx';
 
-import Modals from '../Modals/Channels/Modals.jsx';
+import ChannelModals from '../Modals/ChannelModals.jsx';
 
 import ChannelContext from '../../contexts/ChannelContext.js';
 
@@ -97,7 +97,7 @@ const Channels = () => {
           t,
         }}
       >
-        <Modals />
+        <ChannelModals />
       </ChannelModalContext.Provider>
     </>
   );

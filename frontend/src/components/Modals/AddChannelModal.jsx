@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 import Modal from 'react-bootstrap/Modal';
 
-import useChannelModal from '../../../hooks/useChannelModal.js';
+import useChannelModal from '../../hooks/useChannelModal.js';
 
-import AddChannelForm from '../../Forms/AddChannelForm.jsx';
+import AddChannelForm from '../Forms/AddChannelForm.jsx';
 
-import TYPES_MODAL from '../../../utils/typesModal.js';
+import TYPES_MODAL from '../../utils/typesModal.js';
 
 const AddChannelModal = () => {
   const { handleCloseCurrentModal, t } = useChannelModal();

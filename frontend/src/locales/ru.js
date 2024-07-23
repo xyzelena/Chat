@@ -69,10 +69,12 @@ export default {
       networkError: 'Ошибка соединения',
       messageSendError: 'Ошибка отправки сообщения',
       channelAddError: 'Ошибка добавления канала',
+      channelEditError: 'Ошибка переименования канала',
     },
 
     infoToast: {
       channelAdding: 'Добавление канала...',
+      channelEditing: 'Переименование...',
     },
   },
 };

@@ -12,16 +12,11 @@ import useChannelModal from '../../hooks/useChannelModal.js';
 
 import useSocket from '../../hooks/useSocket.js';
 
-import { useAddChannelMutation } from '../../api/channelsApi.js';
+import { useEditChannelMutation } from '../../api/channelsApi.js';
 
 const RenameChannelForm = () => {
-  const {
-    handleCloseCurrentModal,
-    t,
-    refetch,
-    handleCurrentChannelId,
-    channels,
-  } = useChannelModal();
+  const { channels, currentChannelId, handleCloseCurrentModal, refetch, t } =
+    useChannelModal();
 
   const socket = useSocket();
 
@@ -29,47 +24,55 @@ const RenameChannelForm = () => {
 
   const namesChannels = channels.map((channel) => channel.name);
 
+  const currentChannel = channels.find(
+    (channel) => channel.id === currentChannelId,
+  );
+
   const schema = schemaValidationYup(namesChannels, t);
 
-  const [addChannel, { error: addChannelError, isLoading: isAddingChannel }] =
-    useAddChannelMutation();
+  const [
+    editChannel,
+    { error: editChannelError, isLoading: isEditingChannel },
+  ] = useEditChannelMutation();
 
   useEffect(() => {
     refInputName.current.focus();
   }, []);
 
   useEffect(() => {
-    if (isAddingChannel) {
-      toast.info(t('infoToast.channelAdding'));
+    if (isEditingChannel) {
+      toast.info(t('infoToast.channelEditing'));
     }
-  }, [isAddingChannel]);
+  }, [isEditingChannel]);
 
   const formik = useFormik({
     initialValues: {
-      name: '',
+      name: currentChannel.name,
     },
 
     validationSchema: schema,
 
     onSubmit: async (valuesForm) => {
       try {
-        const response = await addChannel(valuesForm);
+        const response = await editChannel({
+          id: currentChannelId,
+          updateData: valuesForm,
+        });
 
-        socket.emit('newChannel', response.data, (acknowledgment) => {
+        socket.emit('renameChannel', response.data, (acknowledgment) => {
           if (acknowledgment.error) {
-            toast.error(t('errorsToast.channelAddError'));
+            toast.error(t('errorsToast.channelEditError'));
           } else {
             console.log(acknowledgment.status);
           }
         });
 
-        refetch();
-
         handleCloseCurrentModal();
-        handleCurrentChannelId(response.data.id);
+
+        refetch();
       } catch (err) {
-        console.error('Error adding channel:', err);
-        toast.error(t('errorsToast.channelAddError'));
+        console.error('Error editing channel:', err);
+        toast.error(t('errorsToast.channelEditError'));
       }
     },
   });

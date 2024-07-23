@@ -1,7 +1,7 @@
 import AddChannelModal from './AddChannelModal.jsx';
 import RenameChannelModal from './RenameChannelModal .jsx';
 
-const Modals = () => {
+const ChannelModals = () => {
   return (
     <div className="channelModals">
       <AddChannelModal />
@@ -10,4 +10,4 @@ const Modals = () => {
   );
 };
 
-export default Modals;
+export default ChannelModals;

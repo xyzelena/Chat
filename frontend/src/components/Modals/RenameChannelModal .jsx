@@ -1,19 +1,23 @@
 import { useSelector } from 'react-redux';
 import Modal from 'react-bootstrap/Modal';
 
-import useChannelModal from '../../../hooks/useChannelModal.js';
+import useChannelModal from '../../hooks/useChannelModal.js';
 
-import RenameChannelForm from '../../Forms/RenameChannelForm.jsx';
+import RenameChannelForm from '../Forms/RenameChannelForm.jsx';
 
-import TYPES_MODAL from '../../../utils/typesModal.js';
+import TYPES_MODAL from '../../utils/typesModal.js';
 
 const RenameChannelModal = () => {
   const { handleCloseCurrentModal, t } = useChannelModal();
 
   const { isVisible, type } = useSelector((state) => state.modals);
 
+  // console.log(isVisible);
+
+  // console.log(type);
+
   const isCurrentModalVisible =
-    type === TYPES_MODAL.RENAME_CHANNEL && isVisible;
+    type === TYPES_MODAL.RENAME_CHANNEL() && isVisible;
 
   return (
     <Modal
