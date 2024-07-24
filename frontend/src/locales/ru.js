@@ -1,7 +1,7 @@
 export default {
   translation: {
     baseTextUI: {
-      header: 'Чат',
+      header: 'Hexlet Chat',
     },
 
     buttons: {
