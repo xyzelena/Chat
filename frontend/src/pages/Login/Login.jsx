@@ -18,7 +18,7 @@ const Login = () => {
         </div>
 
         <div className="forma">
-          <h1> {t('loginPage.header')}</h1>
+          <h1>{t('loginPage.header')}</h1>
 
           <LoginForm />
         </div>
