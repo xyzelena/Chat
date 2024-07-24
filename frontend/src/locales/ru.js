@@ -35,6 +35,21 @@ export default {
       invalidCredentials: 'Неверные имя пользователя или пароль',
     },
 
+    signUpPage: {
+      header: 'Регистрация',
+
+      username: 'Имя пользователя',
+      ruleUsername: 'От 3 до 20 символов',
+
+      password: 'Пароль',
+      rulePassword: 'Не менее 6 символов',
+
+      confirmPassword: 'Подтвердите пароль',
+      ruleConfirmPassword: 'Пароли должны совпадать',
+
+      btnSignUpSubmit: 'Зарегистрироваться',
+    },
+
     messages: {
       countMessages_one: '{{count}} сообщение',
       countMessages_few: '{{count}} сообщения',
@@ -65,6 +80,9 @@ export default {
       required: 'Обязательное поле',
       notOneOf: 'Должно быть уникальным',
       name: 'Обязательное поле',
+
+      minPassword: 'Не менее 6 символов',
+      matchPasswords: 'Пароли должны совпадать',
     },
 
     errorsToast: {
