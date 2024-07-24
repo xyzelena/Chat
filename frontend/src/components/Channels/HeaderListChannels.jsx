@@ -6,7 +6,7 @@ const HeaderListChannels = (props) => {
   const { showChannelModal, t } = props;
 
   return (
-    <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
+    <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4 bg-light bg-gradient shadow-sm small">
       <b>{t('channels.header')}</b>
 
       <button
