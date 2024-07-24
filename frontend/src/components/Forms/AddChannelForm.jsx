@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 
 import cn from 'classnames';
 
-import schemaValidationYup from '../../utils/schemaValidationYup.js';
+import schemaYupNameChannel from '../../utils/schemaYupNameChannel.js';
 
 import useChannelModal from '../../hooks/useChannelModal.js';
 
@@ -29,7 +29,7 @@ const AddChannelForm = () => {
 
   const namesChannels = channels.map((channel) => channel.name);
 
-  const schema = schemaValidationYup(namesChannels, t);
+  const schema = schemaYupNameChannel(namesChannels, t);
 
   const [addChannel, { error: addChannelError, isLoading: isAddingChannel }] =
     useAddChannelMutation();

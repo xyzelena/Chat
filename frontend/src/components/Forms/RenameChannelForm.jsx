@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 
 import cn from 'classnames';
 
-import schemaValidationYup from '../../utils/schemaValidationYup.js';
+import schemaYupNameChannel from '../../utils/schemaYupNameChannel.js';
 
 import useChannelModal from '../../hooks/useChannelModal.js';
 
@@ -28,7 +28,7 @@ const RenameChannelForm = () => {
     (channel) => channel.id === currentChannelId,
   );
 
-  const schema = schemaValidationYup(namesChannels, t);
+  const schema = schemaYupNameChannel(namesChannels, t);
 
   const [
     editChannel,
