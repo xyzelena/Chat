@@ -11,7 +11,7 @@ const SignUp = () => {
     <div className="container_enteringData">
       <div className="container_enteringData_main">
         <div className="container_enteringData_img">
-          <img src={img} alt={t('signUpPage.header')} />
+          <img src={img} alt={t('loginPage.header')} />
         </div>
 
         <div className="forma">

@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 
 import { useFormik } from 'formik';
 
+import cn from 'classnames';
+
 import useAuth from '../../hooks/useAuth.js';
 
 import axiosApi from '../../api/axiosApi.js';
@@ -32,17 +34,17 @@ const LoginForm = () => {
   useEffect(() => {
     if (validAuth === false) {
       refUsername.current.focus();
-      refUsername.current.classList.add('is-invalid');
-      refPassword.current.classList.add('is-invalid');
+      // refUsername.current.classList.add('is-invalid');
+      // refPassword.current.classList.add('is-invalid');
       refFeedback.current.style.display = 'block';
     }
 
     if (validAuth === true) {
-      refUsername.current.classList.remove('is-invalid');
-      refPassword.current.classList.remove('is-invalid');
+      // refUsername.current.classList.remove('is-invalid');
+      // refPassword.current.classList.remove('is-invalid');
 
-      refUsername.current.classList.add('is-valid');
-      refPassword.current.classList.add('is-valid');
+      // refUsername.current.classList.add('is-valid');
+      // refPassword.current.classList.add('is-valid');
 
       refFeedback.current.style.display = 'none';
     }
@@ -63,6 +65,7 @@ const LoginForm = () => {
       try {
         const response = await axiosApi.post(ROUTES.login(), valuesForm);
         //console.log(response.data); // => { token: ..., username: 'admin' }
+
         if (response.data.token) {
           logIn(response.data);
           setValidAuth(true);
@@ -70,7 +73,6 @@ const LoginForm = () => {
       } catch (err) {
         if (err.code === 'ERR_NETWORK') {
           toast.error(t('errorsToast.networkError'));
-          //logOut();
         } else {
           setValidAuth(false);
           setError(t('loginForm.invalidCredentials'));
@@ -79,9 +81,14 @@ const LoginForm = () => {
     },
   });
 
+  const inputClasses = cn('form-control', {
+    'is-valid': validAuth === true,
+    'is-invalid': validAuth === false,
+  });
+
   return (
     <Form onSubmit={formik.handleSubmit}>
-      <div className="form-group">
+      <div className="form-floating mb-3">
         <input
           name="username"
           id="username"
@@ -89,14 +96,18 @@ const LoginForm = () => {
           required
           placeholder={t('loginForm.login')}
           type="text"
-          className="form-control"
+          className={inputClasses}
           onChange={formik.handleChange}
           value={formik.values.username}
           ref={refUsername}
         />
+
+        <label className="form-label" htmlFor="username">
+          {t('loginForm.login')}
+        </label>
       </div>
 
-      <div className="form-group">
+      <div className="form-floating mb-3">
         <input
           name="password"
           id="password"
@@ -104,11 +115,15 @@ const LoginForm = () => {
           required
           placeholder={t('loginForm.password')}
           type="password"
-          className="form-control"
+          className={inputClasses}
           onChange={formik.handleChange}
           value={formik.values.password}
           ref={refPassword}
         />
+
+        <label className="form-label" htmlFor="password">
+          {t('loginForm.password')}
+        </label>
 
         <div className="invalid-feedback" ref={refFeedback}>
           {error}
