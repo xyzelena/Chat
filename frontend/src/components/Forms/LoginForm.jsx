@@ -34,18 +34,10 @@ const LoginForm = () => {
   useEffect(() => {
     if (validAuth === false) {
       refUsername.current.focus();
-      // refUsername.current.classList.add('is-invalid');
-      // refPassword.current.classList.add('is-invalid');
       refFeedback.current.style.display = 'block';
     }
 
     if (validAuth === true) {
-      // refUsername.current.classList.remove('is-invalid');
-      // refPassword.current.classList.remove('is-invalid');
-
-      // refUsername.current.classList.add('is-valid');
-      // refPassword.current.classList.add('is-valid');
-
       refFeedback.current.style.display = 'none';
     }
   }, [validAuth]);
