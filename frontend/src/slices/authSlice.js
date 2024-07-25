@@ -7,8 +7,15 @@ const initialState = getItemStorage() ?? { username: '', token: '' };
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    updateUserData: (state, action) => ({
+      ...state,
+      username: action.payload.username,
+      token: action.payload.token,
+    }),
+  },
 });
 
-// По умолчанию экспортируется редьюсер, сгенерированный слайсом
+export const { updateUserData } = authSlice.actions;
+
 export default authSlice.reducer;
