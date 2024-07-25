@@ -24,10 +24,11 @@ const SignUpForm = () => {
   const refPassword = useRef();
   const refConfirmPassword = useRef();
 
+  const ERR_USER_EXISTS = 409;
+
   const { logIn, logOut } = useAuth();
 
   const [validAuth, setValidAuth] = useState(null);
-  const [error, setError] = useState('');
 
   useEffect(() => {
     refUsername.current.focus();
@@ -35,6 +36,20 @@ const SignUpForm = () => {
 
   useEffect(() => {
     if (validAuth) navigate(ROUTES.home(), { replace: false });
+  }, [validAuth]);
+
+  useEffect(() => {
+    if (validAuth === false) {
+      refUsername.current.focus();
+
+      refUsername.current.classList.remove('is-valid');
+      refPassword.current.classList.remove('is-valid');
+      refConfirmPassword.current.classList.remove('is-valid');
+
+      refUsername.current.classList.add('is-invalid');
+      refPassword.current.classList.add('is-invalid');
+      refConfirmPassword.current.classList.add('is-invalid');
+    }
   }, [validAuth]);
 
   const formik = useFormik({
@@ -47,7 +62,30 @@ const SignUpForm = () => {
     validationSchema: () => schemaYupSignUp(formik.values.password, t),
 
     onSubmit: async (valuesForm) => {
-      console.log(valuesForm);
+      const { username, password } = valuesForm;
+
+      try {
+        const response = await axiosApi.post(ROUTES.signup(), {
+          username,
+          password,
+        });
+
+        if (response.data.token) {
+          logIn(response.data);
+          setValidAuth(true);
+        }
+      } catch (err) {
+        if (err.code === 'ERR_NETWORK') {
+          toast.error(t('errorsToast.networkError'));
+        } else if (err.response.status === ERR_USER_EXISTS) {
+          setValidAuth(false);
+          toast.error(t('errorsToast.signupUserExists'));
+        } else {
+          setValidAuth(false);
+          toast.error(t('errorsToast.networkError'));
+          console.log(err);
+        }
+      }
     },
   });
 

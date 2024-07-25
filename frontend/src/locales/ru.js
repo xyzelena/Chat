@@ -87,10 +87,16 @@ export default {
 
     errorsToast: {
       networkError: 'Ошибка соединения',
+
       messageSendError: 'Ошибка отправки сообщения',
+
       channelAddError: 'Ошибка добавления канала',
       channelEditError: 'Ошибка переименования канала',
       channelRemoveError: 'Ошибка удаления канала',
+
+      signupUserExists: 'Такой пользователь уже существует',
+
+      authError: 'Ошибка аутентификации пользователя',
     },
 
     infoToast: {
