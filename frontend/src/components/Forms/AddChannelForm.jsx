@@ -8,6 +8,8 @@ import cn from 'classnames';
 
 import schemaYupNameChannel from '../../utils/schemaYupNameChannel.js';
 
+import useFilter from '../../hooks/useFilter.js';
+
 import useChannelModal from '../../hooks/useChannelModal.js';
 
 import useSocket from '../../hooks/useSocket.js';
@@ -24,6 +26,8 @@ const AddChannelForm = () => {
   } = useChannelModal();
 
   const socket = useSocket();
+
+  const filter = useFilter();
 
   const refInputName = useRef();
 
@@ -52,8 +56,10 @@ const AddChannelForm = () => {
     validationSchema: schema,
 
     onSubmit: async (valuesForm) => {
+      const newNameChannel = filter.clean(valuesForm.name);
+
       try {
-        const response = await addChannel(valuesForm);
+        const response = await addChannel({ name: newNameChannel });
 
         socket.emit('newChannel', response.data, (acknowledgment) => {
           if (acknowledgment.error) {
