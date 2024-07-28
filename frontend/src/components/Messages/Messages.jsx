@@ -48,7 +48,7 @@ const Messages = () => {
 
   useEffect(() => {
     if (getMessageError) {
-      toast.error(t('errorsToast.networkError'));
+      toast.error(t('errorsToast.messageGettingError'));
     }
   }, [getMessageError]);
 

@@ -88,8 +88,10 @@ export default {
     errorsToast: {
       networkError: 'Ошибка соединения',
 
+      messageGettingError: 'Ошибка получения сообщений',
       messageSendError: 'Ошибка отправки сообщения',
 
+      channelGettingError: 'Ошибка получения каналов',
       channelAddError: 'Ошибка добавления канала',
       channelEditError: 'Ошибка переименования канала',
       channelRemoveError: 'Ошибка удаления канала',

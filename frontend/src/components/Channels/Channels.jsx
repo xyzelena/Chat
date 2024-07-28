@@ -56,7 +56,7 @@ const Channels = () => {
 
   useEffect(() => {
     if (getChannelsError) {
-      toast.error(t('errorsToast.networkError'));
+      toast.error(t('errorsToast.channelGettingError'));
     }
   }, [getChannelsError]);
 
