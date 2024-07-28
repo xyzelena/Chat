@@ -3,10 +3,14 @@ import { useTranslation } from 'react-i18next';
 
 import { BsFillSendPlusFill } from 'react-icons/bs';
 
+import useFilter from '../../hooks/useFilter.js';
+
 const NewMessageForm = (props) => {
   const { username, channelId, addMessageHandler } = props;
 
   const { t } = useTranslation();
+
+  const filter = useFilter();
 
   const refInputNewMessage = useRef();
 
@@ -15,7 +19,11 @@ const NewMessageForm = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const newMessage = { body: message.trim(), username, channelId };
+    const text = filter.clean(message.trim());
+
+    console.log(text);
+
+    const newMessage = { body: text, username, channelId };
 
     addMessageHandler(newMessage);
 
