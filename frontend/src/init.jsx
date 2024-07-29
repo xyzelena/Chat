@@ -4,6 +4,8 @@ import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
+import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
+
 import filter from 'leo-profanity';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -19,6 +21,11 @@ import FilterBadWordsContext from './contexts/FilterBadWordsContext.js';
 import App from './components/App/App.jsx';
 
 import resources from './locales/index.js';
+
+function TestError() {
+  const a = null;
+  return a.hello();
+}
 
 const init = async () => {
   const defaultLng = 'ru';
@@ -45,14 +52,35 @@ const init = async () => {
 
   filter.loadDictionary(defaultLng);
 
+  // const rollbarConfig = {
+  //   enabled: process.env.NODE_ENV === 'production',
+  //   accessToken: process.env.ROLLBAR_TOKEN,
+  //   environment: 'production',
+  //   captureUncaught: true,
+  //   captureUnhandledRejections: true,
+  // };
+
+  const rollbarConfig = {
+    accessToken: process.env.ROLLBAR_TOKEN,
+    payload: {
+      environment: 'production',
+    },
+    captureUncaught: true,
+    captureUnhandledRejections: true,
+  };
+
   return (
-    <Provider store={store}>
-      <SocketContext.Provider value={socket}>
-        <FilterBadWordsContext.Provider value={filter}>
-          <App />
-        </FilterBadWordsContext.Provider>
-      </SocketContext.Provider>
-    </Provider>
+    <RollbarProvider config={rollbarConfig}>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <SocketContext.Provider value={socket}>
+            <FilterBadWordsContext.Provider value={filter}>
+              <App />
+            </FilterBadWordsContext.Provider>
+          </SocketContext.Provider>
+        </Provider>
+      </ErrorBoundary>
+    </RollbarProvider>
   );
 };
 
