@@ -6,9 +6,25 @@
 
 ## Description: 
 
-Chat (Slack)  is a simplified version of the Slack app that allows you to exchange messages in various channels. 
+Chat (Slack) is a real-time application on React/Redux of the Slack app that allows you to exchange messages in various channels. 
 
-This is a real-time application on React/Redux, using AJAX, REST, websockets, React (with hooks), Redux (@reduxjs/toolkit), Formik. 
+The project included working with web sockets, interacting with REST API, using React (with hooks), Redux (via reduxjs/toolkit), organizing routing on the client, authorization and authentication, assembly (webpack) and deployment.
+
+## The project included:
+
+* Create React App for building single-page React applications;
+* Deployment on Render;
+* Monitoring Errors in Production Using Rollbar;
+* Using React Router Routing; 
+* Styling using Bootstrap for React— html/css framework;
+* Asynchronous requests using axios;
+* Using the Socket.IO library, which provides two-way communication between clients and servers in real-time; 
+* Forms using the Formik library;
+* Using the Yup library for data validation;
+* Using an internationalisation framework i18next;
+* Leo-profanity library for filtering obscene words; 
+* GitHub Actions, Eslint, Prettier for maintain code quality;
+* Building a project architecture (MVC);
 
 ## How to use it?
 
@@ -24,7 +40,7 @@ Or register your own account.
 * Send and receive messages in real-time;
 * There is a filter for words in messages and channels; bad words will be hidden by '*';
 
-  ## How to install the app?
+## How to install the app?
 
 - git clone this repository to your computer;
 - make sure that you have node.js and npm installed;
