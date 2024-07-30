@@ -10,6 +10,8 @@ Chat (Slack) is a real-time application on React/Redux of the Slack app that all
 
 The project included working with web sockets, interacting with REST API, using React (with hooks), Redux (via reduxjs/toolkit), organizing routing on the client, authorization and authentication, assembly (webpack) and deployment.
 
+### Link to [Chat](https://chat-iv1v.onrender.com)
+
 ## The project included:
 
 * Create React App for building single-page React applications;
