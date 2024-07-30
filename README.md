@@ -1,6 +1,8 @@
 # Chat (Slack)
 
 [![Actions Status](https://github.com/xyzelena/frontend-project-12/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/xyzelena/frontend-project-12/actions)
+[![Maintainability](https://api.codeclimate.com/v1/badges/282c3d55270bb9f9f823/maintainability)](https://codeclimate.com/github/xyzelena/frontend-project-12/maintainability)
+
 
 ## Description: 
 
