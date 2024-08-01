@@ -3,12 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
-import useSocket from '../../hooks/useSocket.js';
-
-import {
-  useGetMessagesQuery,
-  useAddMessageMutation,
-} from '../../api/messagesApi.js';
+import { useGetMessagesQuery } from '../../api/messagesApi.js';
 
 import { setMessages } from '../../slices/messagesSlice.js';
 
@@ -19,8 +14,6 @@ import NewMessageForm from '../Forms/NewMessageForm.jsx';
 const Messages = () => {
   const dispatch = useDispatch();
 
-  const socket = useSocket();
-
   const { t } = useTranslation();
 
   const {
@@ -30,9 +23,6 @@ const Messages = () => {
     refetch,
   } = useGetMessagesQuery();
   //data => { id: '1', body: 'text message', channelId: '1', username: 'admin }
-
-  const [addMessage, { error: addMessageError, isLoading: isAddingMessage }] =
-    useAddMessageMutation();
 
   const { messages } = useSelector((state) => state.messages);
 
@@ -52,12 +42,6 @@ const Messages = () => {
     }
   }, [getMessageError]);
 
-  useEffect(() => {
-    if (addMessageError) {
-      toast.error(t('errorsToast.messageSendError'));
-    }
-  }, [addMessageError]);
-
   const currentChannel = channels.find(
     (channel) => channel.id === currentChannelId,
   );
@@ -67,25 +51,6 @@ const Messages = () => {
   );
 
   const countCurrentChannelMessages = currentChannelMessages.length;
-
-  const addMessageHandler = async (messageData) => {
-    try {
-      const response = await addMessage(messageData);
-
-      socket.emit('newMessage', response.data, (acknowledgment) => {
-        if (acknowledgment.error) {
-          toast.error(t('errorsToast.messageSendError'));
-        } else {
-          console.log(acknowledgment.status);
-        }
-      });
-
-      refetch();
-    } catch (err) {
-      console.error('Error sending message:', err);
-      toast.error(t('errorsToast.messageSendError'));
-    }
-  };
 
   return (
     <>
@@ -109,7 +74,7 @@ const Messages = () => {
         <NewMessageForm
           username={username}
           channelId={currentChannelId}
-          addMessageHandler={addMessageHandler}
+          refetchListMessages={refetch}
         />
       </div>
     </>

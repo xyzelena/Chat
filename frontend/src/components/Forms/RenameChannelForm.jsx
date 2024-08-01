@@ -20,7 +20,7 @@ const RenameChannelForm = () => {
   const { channels, currentChannelId, handleCloseCurrentModal, refetch, t } =
     useChannelModal();
 
-  const socket = useSocket();
+  const { renameOneChannel } = useSocket();
 
   const filter = useFilter();
 
@@ -65,7 +65,7 @@ const RenameChannelForm = () => {
           updateData: { name: newNameChannel },
         });
 
-        socket.emit('renameChannel', response.data, (acknowledgment) => {
+        renameOneChannel(response.data, (acknowledgment) => {
           if (acknowledgment.error) {
             toast.error(t('errorsToast.channelEditError'));
           } else {

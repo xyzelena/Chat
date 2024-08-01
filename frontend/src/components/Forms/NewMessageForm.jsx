@@ -3,10 +3,17 @@ import { useTranslation } from 'react-i18next';
 
 import { BsFillSendPlusFill } from 'react-icons/bs';
 
+import { toast } from 'react-toastify';
+
 import useFilter from '../../hooks/useFilter.js';
+import useSocket from '../../hooks/useSocket.js';
+
+import { useAddMessageMutation } from '../../api/messagesApi.js';
 
 const NewMessageForm = (props) => {
-  const { username, channelId, addMessageHandler } = props;
+  const { username, channelId, refetchListMessages } = props;
+
+  const { addNewMessage } = useSocket();
 
   const { t } = useTranslation();
 
@@ -16,12 +23,42 @@ const NewMessageForm = (props) => {
 
   const [message, setNewMessage] = useState('');
 
+  const [addMessage, { error: addMessageError, isLoading: isAddingMessage }] =
+    useAddMessageMutation();
+
+  useEffect(() => {
+    refInputNewMessage.current.focus();
+  }, [channelId]);
+
+  useEffect(() => {
+    if (addMessageError) {
+      toast.error(t('errorsToast.messageSendError'));
+    }
+  }, [addMessageError]);
+
+  const addMessageHandler = async (messageData) => {
+    try {
+      const response = await addMessage(messageData);
+
+      addNewMessage(response.data, (acknowledgment) => {
+        if (acknowledgment.error) {
+          toast.error(t('errorsToast.messageSendError'));
+        } else {
+          console.log(acknowledgment.status);
+        }
+      });
+
+      refetchListMessages();
+    } catch (err) {
+      console.error('Error sending message:', err);
+      toast.error(t('errorsToast.messageSendError'));
+    }
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
     const text = filter.clean(message.trim());
-
-    console.log(text);
 
     const newMessage = { body: text, username, channelId };
 
@@ -29,10 +66,6 @@ const NewMessageForm = (props) => {
 
     setNewMessage('');
   };
-
-  useEffect(() => {
-    refInputNewMessage.current.focus();
-  }, [channelId]);
 
   return (
     <form

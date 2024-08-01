@@ -12,9 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import store from './store/index.js';
 
-import initSocket from './socket.js';
-
-import SocketContext from './contexts/SocketContext.js';
+import { SocketContextProvider } from './contexts/SocketContext.js';
 
 import FilterBadWordsContext from './contexts/FilterBadWordsContext.js';
 
@@ -48,17 +46,7 @@ const init = async () => {
       },
     });
 
-  const socket = initSocket();
-
   filter.loadDictionary(defaultLng);
-
-  // const rollbarConfig = {
-  //   enabled: process.env.NODE_ENV === 'production',
-  //   accessToken: process.env.ROLLBAR_TOKEN,
-  //   environment: 'production',
-  //   captureUncaught: true,
-  //   captureUnhandledRejections: true,
-  // };
 
   const rollbarConfig = {
     accessToken: process.env.ROLLBAR_TOKEN,
@@ -73,11 +61,11 @@ const init = async () => {
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundary>
         <Provider store={store}>
-          <SocketContext.Provider value={socket}>
+          <SocketContextProvider>
             <FilterBadWordsContext.Provider value={filter}>
               <App />
             </FilterBadWordsContext.Provider>
-          </SocketContext.Provider>
+          </SocketContextProvider>
         </Provider>
       </ErrorBoundary>
     </RollbarProvider>

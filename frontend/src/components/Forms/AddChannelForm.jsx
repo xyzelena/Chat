@@ -25,7 +25,7 @@ const AddChannelForm = () => {
     channels,
   } = useChannelModal();
 
-  const socket = useSocket();
+  const { addNewChannel } = useSocket();
 
   const filter = useFilter();
 
@@ -61,7 +61,7 @@ const AddChannelForm = () => {
       try {
         const response = await addChannel({ name: newNameChannel });
 
-        socket.emit('newChannel', response.data, (acknowledgment) => {
+        addNewChannel(response.data, (acknowledgment) => {
           if (acknowledgment.error) {
             toast.error(t('errorsToast.channelAddError'));
           } else {
