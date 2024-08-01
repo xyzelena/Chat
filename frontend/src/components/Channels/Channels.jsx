@@ -52,7 +52,7 @@ const Channels = () => {
 
       if (!currentChannelId) handleCurrentChannelId(data[0].id);
     }
-  }, [data]);
+  }, [data, currentChannelId]);
 
   useEffect(() => {
     if (getChannelsError) {
