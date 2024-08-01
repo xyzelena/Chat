@@ -59,6 +59,10 @@ make build
 make start
 ```
 
+<<<<<<< HEAD
 Other commands can be found in the Makefile.
 
   
+=======
+Other commands can be found in the Makefile.
+>>>>>>> bd4d37d (update file)
