@@ -23,12 +23,6 @@ const RemoveChannelForm = () => {
     { error: removeChannelError, isLoading: isRemovingChannel },
   ] = useRemoveChannelMutation();
 
-  useEffect(() => {
-    if (isRemovingChannel) {
-      toast.info(t('infoToast.channelRemoving'));
-    }
-  }, [isRemovingChannel]);
-
   const handleRemoveChannel = async () => {
     try {
       const response = await removeChannel(currentChannelId);
@@ -41,11 +35,11 @@ const RemoveChannelForm = () => {
         }
       });
 
-      refetch();
+      toast.success(t('successToast.channelRemoved'));
 
       handleCurrentChannelId(null);
-
       handleCloseCurrentModal();
+      refetch();
     } catch (err) {
       console.error('Error removing channel:', err);
       toast.error(t('errorsToast.channelRemoveError'));

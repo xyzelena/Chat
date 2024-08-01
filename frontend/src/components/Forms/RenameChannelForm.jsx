@@ -43,12 +43,6 @@ const RenameChannelForm = () => {
     refInputName.current.focus();
   }, []);
 
-  useEffect(() => {
-    if (isEditingChannel) {
-      toast.info(t('infoToast.channelEditing'));
-    }
-  }, [isEditingChannel]);
-
   const formik = useFormik({
     initialValues: {
       name: currentChannel.name,
@@ -73,8 +67,9 @@ const RenameChannelForm = () => {
           }
         });
 
-        handleCloseCurrentModal();
+        toast.success(t('successToast.channelEdited'));
 
+        handleCloseCurrentModal();
         refetch();
       } catch (err) {
         console.error('Error editing channel:', err);

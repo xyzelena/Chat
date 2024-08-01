@@ -101,10 +101,10 @@ export default {
       authError: 'Ошибка аутентификации пользователя',
     },
 
-    infoToast: {
-      channelAdding: 'Добавление канала...',
-      channelEditing: 'Переименование...',
-      channelRemoving: 'Удаление канала...',
+    successToast: {
+      channelAdded: 'Канал создан',
+      channelEdited: 'Канал переименован',
+      channelRemoved: 'Канал удален',
     },
   },
 };

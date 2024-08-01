@@ -42,12 +42,6 @@ const AddChannelForm = () => {
     refInputName.current.focus();
   }, []);
 
-  useEffect(() => {
-    if (isAddingChannel) {
-      toast.info(t('infoToast.channelAdding'));
-    }
-  }, [isAddingChannel]);
-
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -69,10 +63,11 @@ const AddChannelForm = () => {
           }
         });
 
-        refetch();
+        toast.success(t('successToast.channelAdded'));
 
         handleCloseCurrentModal();
         handleCurrentChannelId(response.data.id);
+        refetch();
       } catch (err) {
         console.error('Error adding channel:', err);
         toast.error(t('errorsToast.channelAddError'));
