@@ -20,11 +20,6 @@ import App from './components/App/App.jsx';
 
 import resources from './locales/index.js';
 
-function TestError() {
-  const a = null;
-  return a.hello();
-}
-
 const init = async () => {
   const defaultLng = 'ru';
 
