@@ -12,6 +12,8 @@ The project included working with web sockets, interacting with REST API, using 
 
 ### Link to [Chat](https://chat-iv1v.onrender.com)
 
+Link to documentation for Backend Chat [@hexlet/chat-server](https://www.npmjs.com/package/@hexlet/chat-server)
+
 ## The project included:
 
 * Create React App for building single-page React applications;
