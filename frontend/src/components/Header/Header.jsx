@@ -16,25 +16,26 @@ const Header = () => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <header>
-        <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
-          <div className="container">
-            <Link className="navbar-brand" to="/">
-              {t('baseTextUI.header')}
-            </Link>
+    <div className="h-100" id="chat">
+      <div className="d-flex flex-column h-100">
+        <header>
+          <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
+            <div className="container">
+              <Link className="navbar-brand" to="/">
+                {t('baseTextUI.header')}
+              </Link>
 
-            {loggedIn && <BtnExit />}
-          </div>
-        </nav>
-      </header>
+              {loggedIn && <BtnExit />}
+            </div>
+          </nav>
+        </header>
 
-      <main>
-        <Outlet />
-      </main>
-
+        <main>
+          <Outlet />
+        </main>
+      </div>
       <ToastContainer />
-    </>
+    </div>
   );
 };
 

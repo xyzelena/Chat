@@ -60,7 +60,10 @@ const Chat = () => {
   }, []);
 
   return (
-    <div className="container h-100 my-4 rounded shadow">
+    <div
+      className="container my-4 rounded shadow overflow-hidden"
+      style={{ height: 'calc(100vh - 100px)' }}
+    >
       <div className="row h-100 bg-white flex-md-row">
         <div className="col-4 col-md-2 px-0 flex-column h-100 d-flex">
           <Channels />
