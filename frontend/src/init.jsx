@@ -6,15 +6,13 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 
-import filter from 'leo-profanity';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import store from './store/index.js';
 
 import { SocketContextProvider } from './contexts/SocketContext.js';
 
-import FilterBadWordsContext from './contexts/FilterBadWordsContext.js';
+import { BadWordsProvider } from './contexts/FilterBadWordsContext.js';
 
 import App from './components/App/App.jsx';
 
@@ -41,8 +39,6 @@ const init = async () => {
       },
     });
 
-  filter.loadDictionary(defaultLng);
-
   const rollbarConfig = {
     accessToken: process.env.ROLLBAR_TOKEN,
     payload: {
@@ -57,9 +53,9 @@ const init = async () => {
       <ErrorBoundary>
         <Provider store={store}>
           <SocketContextProvider>
-            <FilterBadWordsContext.Provider value={filter}>
+            <BadWordsProvider>
               <App />
-            </FilterBadWordsContext.Provider>
+            </BadWordsProvider>
           </SocketContextProvider>
         </Provider>
       </ErrorBoundary>

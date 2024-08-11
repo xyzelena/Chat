@@ -58,7 +58,7 @@ const NewMessageForm = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const text = filter.clean(message.trim());
+    const text = filter.cleanBadWords(message.trim());
 
     const newMessage = { body: text, username, channelId };
 

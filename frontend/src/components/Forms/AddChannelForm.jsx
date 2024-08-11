@@ -50,7 +50,7 @@ const AddChannelForm = () => {
     validationSchema: schema,
 
     onSubmit: async (valuesForm) => {
-      const newNameChannel = filter.clean(valuesForm.name);
+      const newNameChannel = filter.cleanBadWords(valuesForm.name);
 
       try {
         const response = await addChannel({ name: newNameChannel });
