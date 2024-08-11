@@ -20,13 +20,13 @@ const Channel = (props) => {
     'text-truncate',
     'btn',
     {
-      'btn-primary': currentChannelId === channel.id,
+      'btn-secondary': currentChannelId === channel.id,
       'btn-light': currentChannelId !== channel.id,
     },
   );
 
   const btnToggleClass = cn({
-    'btn-primary': currentChannelId === channel.id,
+    'btn-secondary': currentChannelId === channel.id,
     'btn-light': currentChannelId !== channel.id,
   });
 
