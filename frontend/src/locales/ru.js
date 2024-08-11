@@ -104,7 +104,7 @@ export default {
     successToast: {
       channelAdded: 'Канал создан',
       channelEdited: 'Канал переименован',
-      channelRemoved: 'Канал удален',
+      channelRemoved: 'Канал удалён',
     },
   },
 };
