@@ -25,7 +25,7 @@ const schemaYupSignUp = (password, t) => {
 
     confirmPassword: Yup.string()
       .matches(new RegExp(password), t('errorsValidation.matchPasswords'))
-      .min(6, t('errorsValidation.minPassword'))
+      // .min(6, t('errorsValidation.minPassword'))
       .required(t('errorsValidation.required')),
   });
 

@@ -157,6 +157,7 @@ const SignUpForm = () => {
           id="confirmPassword"
           className={inputClasses('confirmPassword')}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.confirmPassword}
           ref={refConfirmPassword}
         />
