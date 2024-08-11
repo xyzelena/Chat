@@ -106,6 +106,7 @@ const SignUpForm = () => {
           id="username"
           className={inputClasses('username')}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.username}
           ref={refUsername}
         />
@@ -132,6 +133,7 @@ const SignUpForm = () => {
           id="password"
           className={inputClasses('password')}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.password}
           ref={refPassword}
         />
