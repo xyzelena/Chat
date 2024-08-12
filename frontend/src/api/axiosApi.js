@@ -8,26 +8,24 @@ const axiosApi = axios.create({
 
 // Добавление interceptor для запросов
 axiosApi.interceptors.request.use(
-  (config) => {
+  (config) => 
     // const data = getItemStorage();
 
     // if (data) {
     //   config.headers.Authorization = `Bearer ${data.token}`;
     // }
 
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  },
+     config
+  ,
+  (error) => Promise.reject(error),
 );
 
 // Добавление interceptor для ответов
 axiosApi.interceptors.response.use(
-  (response) => {
+  (response) => 
     // Здесь можно добавить дополнительную логику обработки ответов
-    return response;
-  },
+     response
+  ,
   (error) => {
     console.log(error);
     return Promise.reject(error);

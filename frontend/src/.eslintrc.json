@@ -42,19 +42,19 @@
       { "namedComponents": "arrow-function" }
     ],
     "testing-library/no-debug": 0,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
 
-    "no-unused-vars": 0,
-    "react/jsx-no-constructed-context-values": 0,
-    "arrow-body-style": 0,
-    "spaced-comment": 0,
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": true,
-        "optionalDependencies": true,
-        "peerDependencies": true
-      }
-    ]
+    // "no-unused-vars": 0,
+    // "react/jsx-no-constructed-context-values": 0,
+    // "arrow-body-style": 0,
+    // "spaced-comment": 0,
+    // "import/no-extraneous-dependencies": [
+    //   "error",
+    //   {
+    //     "devDependencies": true,
+    //     "optionalDependencies": true,
+    //     "peerDependencies": true
+    //   }
+    // ]
   }
 }

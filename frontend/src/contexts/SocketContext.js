@@ -9,13 +9,8 @@ const SocketContext = createContext({});
 const SocketContextProvider = ({ children }) => {
   const socket = initSocket();
 
-  const {
-    NEW_MESSAGE,
-    NEW_CHANNEL,
-    RENAME_CHANNEL,
-    REMOVE_CHANNEL,
-    CONNECT_ERROR,
-  } = TYPES_SOCKET_EVENTS;
+  const { NEW_MESSAGE, NEW_CHANNEL, RENAME_CHANNEL, REMOVE_CHANNEL } =
+    TYPES_SOCKET_EVENTS;
 
   const value = useMemo(() => {
     const addNewMessage = (message, cb) => {
