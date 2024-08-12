@@ -10,8 +10,9 @@ import TYPES_MODAL from '../../utils/typesModal.js';
 const Channel = (props) => {
   const { channel } = props;
 
-  const { currentChannelId, handleCurrentChannelId, showChannelModal, t } =
-    useChannel();
+  const {
+    currentChannelId, handleCurrentChannelId, showChannelModal, t,
+  } = useChannel();
 
   const btnChannelNameClass = cn(
     'w-100',

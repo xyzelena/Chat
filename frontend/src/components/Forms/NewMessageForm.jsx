@@ -90,7 +90,10 @@ const NewMessageForm = (props) => {
           disabled=""
         >
           <BsFillSendPlusFill />
-          <span className="visually-hidden"> {t('buttons.btnSend')}</span>
+          <span className="visually-hidden">
+            {' '}
+            {t('buttons.btnSend')}
+          </span>
         </button>
       </div>
     </form>

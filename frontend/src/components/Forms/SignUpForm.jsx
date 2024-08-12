@@ -89,11 +89,10 @@ const SignUpForm = () => {
     },
   });
 
-  const inputClasses = (field) =>
-    cn('form-control', {
-      'is-valid': formik.touched[field] && !formik.errors[field],
-      'is-invalid': formik.touched[field] && formik.errors[field],
-    });
+  const inputClasses = (field) => cn('form-control', {
+    'is-valid': formik.touched[field] && !formik.errors[field],
+    'is-invalid': formik.touched[field] && formik.errors[field],
+  });
 
   return (
     <Form onSubmit={formik.handleSubmit}>

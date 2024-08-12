@@ -31,7 +31,7 @@ const init = async () => {
     .use(LanguageDetector) // с помощью плагина определяем язык пользователя в браузере
 
     .init({
-      fallbackLng: defaultLng, // если переводы на языке пользователя недоступны, то будет использоваться язык, указанный в этом поле
+      fallbackLng: defaultLng,
       debug: false,
       resources,
       interpolation: {

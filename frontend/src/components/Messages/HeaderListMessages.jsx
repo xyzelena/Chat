@@ -8,7 +8,10 @@ const HeaderListMessages = (props) => {
   return (
     <>
       <p className="m-0">
-        <b># {nameCurrentChannel}</b>
+        <b>
+          #
+          {nameCurrentChannel}
+        </b>
       </p>
       <span className="text-muted">
         {t('messages.countMessages', { count: countCurrentChannelMessages })}

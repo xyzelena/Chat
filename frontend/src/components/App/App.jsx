@@ -21,11 +21,11 @@ const App = () => (
         <Route path={ROUTES.home()} element={<Header />}>
           <Route
             index
-            element={
+            element={(
               <PrivateRoute>
                 <Chat />
               </PrivateRoute>
-            }
+            )}
           />
           <Route path={ROUTES.login()} element={<Login />} />
           <Route path={ROUTES.signup()} element={<SignUp />} />

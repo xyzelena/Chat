@@ -15,7 +15,10 @@ const SignUp = () => {
         </div>
 
         <div className="forma">
-          <h1 className="mb-4"> {t('signUpPage.header')}</h1>
+          <h1 className="mb-4">
+            {' '}
+            {t('signUpPage.header')}
+          </h1>
           <SignUpForm />
         </div>
       </div>

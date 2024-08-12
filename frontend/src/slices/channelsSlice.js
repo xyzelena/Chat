@@ -25,11 +25,9 @@ const channelsSlice = createSlice({
     }),
     setEditChannel: (state, action) => ({
       ...state,
-      channels: state.channels.map((channel) =>
-        channel.id === action.payload.id
-          ? { ...channel, ...action.payload }
-          : channel,
-      ),
+      channels: state.channels.map((channel) => (channel.id === action.payload.id
+        ? { ...channel, ...action.payload }
+        : channel)),
     }),
     setCurrentChannelId: (state, action) => ({
       ...state,

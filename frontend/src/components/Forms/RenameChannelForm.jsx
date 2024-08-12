@@ -17,8 +17,9 @@ import useSocket from '../../hooks/useSocket.js';
 import { useEditChannelMutation } from '../../api/channelsApi.js';
 
 const RenameChannelForm = () => {
-  const { channels, currentChannelId, handleCloseCurrentModal, refetch, t } =
-    useChannelModal();
+  const {
+    channels, currentChannelId, handleCloseCurrentModal, refetch, t,
+  } = useChannelModal();
 
   const { renameOneChannel } = useSocket();
 

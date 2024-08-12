@@ -12,8 +12,7 @@ const RemoveChannelModal = () => {
 
   const { isVisible, type } = useSelector((state) => state.modals);
 
-  const isCurrentModalVisible =
-    type === TYPES_MODAL.REMOVE_CHANNEL() && isVisible;
+  const isCurrentModalVisible = type === TYPES_MODAL.REMOVE_CHANNEL() && isVisible;
 
   return (
     <Modal
