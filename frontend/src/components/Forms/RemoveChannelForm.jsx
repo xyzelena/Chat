@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 import useChannelModal from '../../hooks/useChannelModal.js';

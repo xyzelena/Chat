@@ -12,10 +12,6 @@ const RenameChannelModal = () => {
 
   const { isVisible, type } = useSelector((state) => state.modals);
 
-  // console.log(isVisible);
-
-  // console.log(type);
-
   const isCurrentModalVisible =
     type === TYPES_MODAL.RENAME_CHANNEL() && isVisible;
 

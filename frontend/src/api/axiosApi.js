@@ -6,31 +6,17 @@ const axiosApi = axios.create({
   timeout: 5000,
 });
 
-// Добавление interceptor для запросов
 axiosApi.interceptors.request.use(
-  (config) => 
-    // const data = getItemStorage();
-
-    // if (data) {
-    //   config.headers.Authorization = `Bearer ${data.token}`;
-    // }
-
-     config
-  ,
+  (config) => config,
   (error) => Promise.reject(error),
 );
 
-// Добавление interceptor для ответов
 axiosApi.interceptors.response.use(
-  (response) => 
-    // Здесь можно добавить дополнительную логику обработки ответов
-     response
-  ,
+  (response) => response,
   (error) => {
     console.log(error);
     return Promise.reject(error);
   },
-  // Здесь можно обрабатывать ошибки, например, обновлять токен при получении 401 ошибки
 );
 
 export default axiosApi;

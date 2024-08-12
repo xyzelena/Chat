@@ -14,28 +14,26 @@ import ROUTES from '../../utils/routes.js';
 
 import './App.css';
 
-const App = () => {
-  return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path={ROUTES.home()} element={<Header />}>
-            <Route
-              index
-              element={
-                <PrivateRoute>
-                  <Chat />
-                </PrivateRoute>
-              }
-            />
-            <Route path={ROUTES.login()} element={<Login />} />
-            <Route path={ROUTES.signup()} element={<SignUp />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
-  );
-};
+const App = () => (
+  <AuthProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path={ROUTES.home()} element={<Header />}>
+          <Route
+            index
+            element={
+              <PrivateRoute>
+                <Chat />
+              </PrivateRoute>
+            }
+          />
+          <Route path={ROUTES.login()} element={<Login />} />
+          <Route path={ROUTES.signup()} element={<SignUp />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </AuthProvider>
+);
 
 export default App;
