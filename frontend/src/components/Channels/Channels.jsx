@@ -37,14 +37,7 @@ const Channels = () => {
     dispatch(setCurrentChannelId(idChannel));
   };
 
-  const {
-    data,
-    error: getChannelsError,
-    isLoading: isGettingChannels,
-    refetch,
-  } = useGetChannelsQuery();
-  // console.log(data);
-  // {id: '1', name: 'general', removable: false}
+  const { data, error: getChannelsError, refetch } = useGetChannelsQuery();
 
   useEffect(() => {
     if (data) {
@@ -52,13 +45,13 @@ const Channels = () => {
 
       if (!currentChannelId) handleCurrentChannelId(data[0].id);
     }
-  }, [data, currentChannelId]);
+  }, [data, currentChannelId, dispatch]);
 
   useEffect(() => {
     if (getChannelsError) {
       toast.error(t('errorsToast.channelGettingError'));
     }
-  }, [getChannelsError]);
+  }, [getChannelsError, t]);
 
   const showChannelModal = (typeModal) => {
     dispatch(

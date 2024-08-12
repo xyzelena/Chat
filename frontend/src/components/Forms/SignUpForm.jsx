@@ -26,7 +26,7 @@ const SignUpForm = () => {
 
   const ERR_USER_EXISTS = 409;
 
-  const { logIn, logOut } = useAuth();
+  const { logIn } = useAuth();
 
   const [validAuth, setValidAuth] = useState(null);
 
@@ -36,7 +36,7 @@ const SignUpForm = () => {
 
   useEffect(() => {
     if (validAuth) navigate(ROUTES.home(), { replace: false });
-  }, [validAuth]);
+  }, [validAuth, navigate]);
 
   useEffect(() => {
     if (validAuth === false) {

@@ -36,7 +36,7 @@ const AuthProvider = ({ children }) => {
       dispatch(updateUserData(data));
       setLoggedIn(true);
     },
-    [],
+    [dispatch],
   );
 
   const logOut = useMemo(
@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
       dispatch(updateUserData({ username: '', token: '' }));
       setLoggedIn(false);
     },
-    [],
+    [dispatch],
   );
 
   const contextValue = useMemo(

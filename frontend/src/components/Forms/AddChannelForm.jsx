@@ -35,8 +35,7 @@ const AddChannelForm = () => {
 
   const schema = schemaYupNameChannel(namesChannels, t);
 
-  const [addChannel, { error: addChannelError, isLoading: isAddingChannel }] =
-    useAddChannelMutation();
+  const [addChannel] = useAddChannelMutation();
 
   useEffect(() => {
     refInputName.current.focus();

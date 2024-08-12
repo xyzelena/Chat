@@ -22,7 +22,6 @@ const Messages = () => {
     isLoading: isGettingMessage,
     refetch,
   } = useGetMessagesQuery();
-  //data => { id: '1', body: 'text message', channelId: '1', username: 'admin }
 
   const { messages } = useSelector((state) => state.messages);
 
@@ -34,13 +33,13 @@ const Messages = () => {
     if (data) {
       dispatch(setMessages(data));
     }
-  }, [data]);
+  }, [data, dispatch]);
 
   useEffect(() => {
     if (getMessageError) {
       toast.error(t('errorsToast.messageGettingError'));
     }
-  }, [getMessageError]);
+  }, [getMessageError, t]);
 
   const currentChannel = channels.find(
     (channel) => channel.id === currentChannelId,

@@ -22,7 +22,7 @@ const LoginForm = () => {
   const refPassword = useRef();
   const refFeedback = useRef();
 
-  const { logIn, logOut } = useAuth();
+  const { logIn } = useAuth();
 
   const [validAuth, setValidAuth] = useState(null);
   const [error, setError] = useState('');
@@ -44,7 +44,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (validAuth) navigate(ROUTES.home(), { replace: false });
-  }, [validAuth]);
+  }, [validAuth, navigate]);
 
   const formik = useFormik({
     initialValues: {
@@ -56,7 +56,6 @@ const LoginForm = () => {
 
       try {
         const response = await axiosApi.post(ROUTES.login(), valuesForm);
-        //console.log(response.data); // => { token: ..., username: 'admin' }
 
         if (response.data.token) {
           logIn(response.data);

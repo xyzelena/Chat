@@ -17,10 +17,7 @@ const RemoveChannelForm = () => {
 
   const { removeOneChannel } = useSocket();
 
-  const [
-    removeChannel,
-    { error: removeChannelError, isLoading: isRemovingChannel },
-  ] = useRemoveChannelMutation();
+  const [removeChannel] = useRemoveChannelMutation();
 
   const handleRemoveChannel = async () => {
     try {

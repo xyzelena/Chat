@@ -34,10 +34,7 @@ const RenameChannelForm = () => {
 
   const schema = schemaYupNameChannel(namesChannels, t);
 
-  const [
-    editChannel,
-    { error: editChannelError, isLoading: isEditingChannel },
-  ] = useEditChannelMutation();
+  const [editChannel] = useEditChannelMutation();
 
   useEffect(() => {
     refInputName.current.focus();

@@ -23,8 +23,7 @@ const NewMessageForm = (props) => {
 
   const [message, setNewMessage] = useState('');
 
-  const [addMessage, { error: addMessageError, isLoading: isAddingMessage }] =
-    useAddMessageMutation();
+  const [addMessage, { error: addMessageError }] = useAddMessageMutation();
 
   useEffect(() => {
     refInputNewMessage.current.focus();
@@ -34,7 +33,7 @@ const NewMessageForm = (props) => {
     if (addMessageError) {
       toast.error(t('errorsToast.messageSendError'));
     }
-  }, [addMessageError]);
+  }, [addMessageError, t]);
 
   const addMessageHandler = async (messageData) => {
     try {
