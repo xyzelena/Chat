@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
@@ -64,32 +64,45 @@ const Channels = () => {
 
   const handleCloseCurrentModal = () => dispatch(resetModalState());
 
+  const channelContextValue = useMemo(
+    () => ({
+      channels,
+      currentChannelId,
+      handleCurrentChannelId,
+      showChannelModal,
+      t,
+    }),
+    [channels, currentChannelId, handleCurrentChannelId, showChannelModal, t],
+  );
+
+  const channelModalContextValue = useMemo(
+    () => ({
+      channels,
+      currentChannelId,
+      handleCurrentChannelId,
+      handleCloseCurrentModal,
+      refetch,
+      t,
+    }),
+    [
+      channels,
+      currentChannelId,
+      handleCurrentChannelId,
+      handleCloseCurrentModal,
+      refetch,
+      t,
+    ],
+  );
+
   return (
     <>
       <HeaderListChannels t={t} showChannelModal={showChannelModal} />
 
-      <ChannelContext.Provider
-        value={{
-          channels,
-          currentChannelId,
-          handleCurrentChannelId,
-          showChannelModal,
-          t,
-        }}
-      >
+      <ChannelContext.Provider value={channelContextValue}>
         <ListChannels />
       </ChannelContext.Provider>
 
-      <ChannelModalContext.Provider
-        value={{
-          channels,
-          currentChannelId,
-          handleCurrentChannelId,
-          handleCloseCurrentModal,
-          refetch,
-          t,
-        }}
-      >
+      <ChannelModalContext.Provider value={channelModalContextValue}>
         <ChannelModals />
       </ChannelModalContext.Provider>
     </>
