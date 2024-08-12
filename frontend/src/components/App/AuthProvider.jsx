@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
 import AuthContext from '../../contexts/AuthContext.js';
@@ -18,22 +18,43 @@ const AuthProvider = ({ children }) => {
 
   const [loggedIn, setLoggedIn] = useState(isLoggedIn);
 
-  const logIn = (data) => {
-    setItemStorage(data);
-    dispatch(updateUserData(data));
-    setLoggedIn(true);
-  };
+  // const logIn = (data) => {
+  //   setItemStorage(data);
+  //   dispatch(updateUserData(data));
+  //   setLoggedIn(true);
+  // };
 
-  const logOut = () => {
-    clearStorage();
-    dispatch(updateUserData({ username: '', token: '' }));
-    setLoggedIn(false);
-  };
+  // const logOut = () => {
+  //   clearStorage();
+  //   dispatch(updateUserData({ username: '', token: '' }));
+  //   setLoggedIn(false);
+  // };
+
+  const logIn = useMemo(
+    () => (data) => {
+      setItemStorage(data);
+      dispatch(updateUserData(data));
+      setLoggedIn(true);
+    },
+    [],
+  );
+
+  const logOut = useMemo(
+    () => () => {
+      clearStorage();
+      dispatch(updateUserData({ username: '', token: '' }));
+      setLoggedIn(false);
+    },
+    [],
+  );
+
+  const contextValue = useMemo(
+    () => ({ loggedIn, logIn, logOut }),
+    [loggedIn, logIn, logOut],
+  );
 
   return (
-    <AuthContext.Provider value={{ loggedIn, logIn, logOut }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };
 
