@@ -18,18 +18,6 @@ const AuthProvider = ({ children }) => {
 
   const [loggedIn, setLoggedIn] = useState(isLoggedIn);
 
-  // const logIn = (data) => {
-  //   setItemStorage(data);
-  //   dispatch(updateUserData(data));
-  //   setLoggedIn(true);
-  // };
-
-  // const logOut = () => {
-  //   clearStorage();
-  //   dispatch(updateUserData({ username: '', token: '' }));
-  //   setLoggedIn(false);
-  // };
-
   const logIn = useMemo(
     () => (data) => {
       setItemStorage(data);

@@ -24,18 +24,14 @@ const init = async () => {
   const i18n = i18next.createInstance();
 
   await i18n
-    // передаем экземпляр i18n в react-i18next,
-    // который сделает его доступным для всех компонентов через context API
     .use(initReactI18next)
-
-    .use(LanguageDetector) // с помощью плагина определяем язык пользователя в браузере
-
+    .use(LanguageDetector)
     .init({
       fallbackLng: defaultLng,
       debug: false,
       resources,
       interpolation: {
-        escapeValue: false, // экранирование уже есть в React, поэтому отключаем
+        escapeValue: false,
       },
     });
 
