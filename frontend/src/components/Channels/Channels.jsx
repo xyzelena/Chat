@@ -31,7 +31,8 @@ const Channels = () => {
 
   const dispatch = useDispatch();
 
-  const { channels, currentChannelId } = useSelector((state) => state.channels);
+  const getChannels = (state) => state.channels;
+  const { channels, currentChannelId } = useSelector(getChannels);
 
   const handleCurrentChannelId = (idChannel) => {
     dispatch(setCurrentChannelId(idChannel));

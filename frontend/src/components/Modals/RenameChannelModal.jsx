@@ -10,9 +10,11 @@ import TYPES_MODAL from '../../utils/typesModal.js';
 const RenameChannelModal = () => {
   const { handleCloseCurrentModal, t } = useChannelModal();
 
-  const { isVisible, type } = useSelector((state) => state.modals);
+  const getModals = (state) => state.modals;
+  const { isVisible, type } = useSelector(getModals);
 
-  const isCurrentModalVisible = type === TYPES_MODAL.RENAME_CHANNEL() && isVisible;
+  const isTrueType = type === TYPES_MODAL.RENAME_CHANNEL();
+  const isCurrentModalVisible = isTrueType && isVisible;
 
   return (
     <Modal

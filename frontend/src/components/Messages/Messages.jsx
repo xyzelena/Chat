@@ -23,11 +23,14 @@ const Messages = () => {
     refetch,
   } = useGetMessagesQuery();
 
-  const { messages } = useSelector((state) => state.messages);
+  const getMessages = (state) => state.messages;
+  const { messages } = useSelector(getMessages);
 
-  const { channels, currentChannelId } = useSelector((state) => state.channels);
+  const getChannels = (state) => state.channels;
+  const { channels, currentChannelId } = useSelector(getChannels);
 
-  const username = useSelector((state) => state.auth.username);
+  const getAuth = (state) => state.auth;
+  const { username } = useSelector(getAuth);
 
   useEffect(() => {
     if (data) {
