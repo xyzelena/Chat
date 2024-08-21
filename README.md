@@ -22,7 +22,8 @@ Link to documentation for Backend Chat [@hexlet/chat-server](https://www.npmjs.c
 * Using React Router Routing; 
 * Styling using Bootstrap for React— html/css framework;
 * Asynchronous requests using axios;
-* Using the Socket.IO library, which provides two-way communication between clients and servers in real-time; 
+* Using the Socket.IO library, which provides two-way communication between clients and servers in real-time;
+* Redux Toolkit for managing and updating global application state;
 * Forms using the Formik library;
 * Using the Yup library for data validation;
 * Using an internationalisation framework i18next;
