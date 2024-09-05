@@ -62,3 +62,15 @@ make build
 make start
 ```
 Other commands can be found in the Makefile.
+
+![image](https://github.com/user-attachments/assets/d2ec0519-c366-4b39-b228-8de1dca9abb5)
+
+![image](https://github.com/user-attachments/assets/24e0c9c1-e0c5-455c-9ab6-56675ee1fb75)
+
+![image](https://github.com/user-attachments/assets/b75e5e5c-3a45-4da6-94c8-72e7319df2e0)
+
+![image](https://github.com/user-attachments/assets/2cd4da84-af50-41b9-8314-1a36ad22b201)
+
+
+
+
